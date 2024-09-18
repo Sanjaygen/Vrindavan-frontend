@@ -51,16 +51,16 @@ const SideDashBoard = () => {
         <SubMenuButton href="/products">
           <FaProductHunt className="sub-menu-icon" /> Products
         </SubMenuButton>
-        <SubMenuButton href="/category">
+        <SubMenuButton href="/categories">
           <FaFolder className="sub-menu-icon" /> Categories
         </SubMenuButton>
-        <SubMenuButton href="/subcategories">
+        <SubMenuButton href="/subCategories">
           <FaFolder className="sub-menu-icon" /> Sub Categories
         </SubMenuButton>
-        <SubMenuButton href="/productbrands">
+        <SubMenuButton href="/productBrands">
           <FaFolder className="sub-menu-icon" /> Product Brands
         </SubMenuButton>
-        <SubMenuButton href="/#">
+        <SubMenuButton href="/productTypes">
           <FaFolder className="sub-menu-icon" /> Product Types
         </SubMenuButton>
       </SubMenu>

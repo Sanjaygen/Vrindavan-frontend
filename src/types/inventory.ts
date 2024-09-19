@@ -1,10 +1,3 @@
-export interface Column {
-    id: string;
-    label: string;
-    minWidth?: number;
-    align?: 'left' | 'center' | 'right';
-    format?: (value: number | string) => string;
-}
 
  export interface Row {
     category?: string;
@@ -17,12 +10,6 @@ export interface Column {
 
 export interface CategoriesTableProps {
     onEditClick: () => void; 
-}
-
-export interface DashboardTableProps {
-    columns: Column[];
-    rows: Row[];
-    onEditClick: (id: string | number) => void;
 }
 
 export interface CategoryProps {
@@ -41,3 +28,17 @@ export interface ProductBrandProps {
     name: string;
     active: boolean;
 }
+
+
+export interface Column {
+    id: string; 
+    label: string; 
+    accessor: string; 
+  }
+  
+  export interface DashboardTableProps {
+    columns: Column[]; 
+    rows: Record<string, any>[]; 
+    onEditClick: (id: string | number) => void;
+    onDeleteClick: (id: string | number) => void;
+  }

@@ -1,41 +1,34 @@
-import { CategoryProps, ProductBrandProps } from "@/types/inventory";
-import { get, post, update } from "./api-service/api";
+import { get, post, update, del } from "./api-service/api";
+import { ProductProps } from "./types";
 
-//CateGories 
-export const fetchCategories = async (): Promise<CategoryProps[]> => {
-    const response = await get<{ data: CategoryProps[] }>('categories');
-    return response.data;
+interface FetchProductsResponse {
+  data: ProductProps[];
+  total: number;
+}
+
+export const fetchProducts = async (): Promise<FetchProductsResponse> => {
+  const response = await get<FetchProductsResponse>(`foods`);
+  return response;
 };
 
-export const createCategories = async (payload: CategoryProps): Promise<CategoryProps> => {
-    const response = await post<{ data: CategoryProps }>('categories', payload);
-    return response.data;
+export const fetchProductById = async (id: number): Promise<ProductProps> => {
+  const response = await get<ProductProps>(`foods/${id}`);
+  return response;
 };
 
-export const updateCategories = async (id: string, payload: CategoryProps) => {
-    const response = await update(`categories/${id}`, payload);
-    return response;
+export const createProduct = async (payload: ProductProps): Promise<ProductProps> => {
+  const response = await post<{ data: ProductProps }>("foods", payload);
+  return response.data;
 };
 
-//Sub-Categories 
-
-export const fetchSubCategories = async (): Promise<CategoryProps[]> => {
-    const response = await get<{ data: CategoryProps[] }>('subcategories');
-    return response.data;
+export const updateProduct = async (
+  id: string,
+  payload: ProductProps
+): Promise<ProductProps> => {
+  const response = await update<{ data: ProductProps }>(`foods/${id}`, payload);
+  return response.data;
 };
 
-export const createSubCategories = async (payload: CategoryProps): Promise<CategoryProps> => {
-    const response = await post<{ data: CategoryProps }>('subcategories', payload);
-    return response.data;
-};
-
-//Product Brand 
-export const fetchProductBrand = async (): Promise<ProductBrandProps[]> => {
-    const response = await get<{ data: ProductBrandProps[] }>('product_brands');
-    return response.data;
-};
-
-export const createProductBrand = async (payload: ProductBrandProps): Promise<ProductBrandProps> => {
-    const response = await post<{ data: ProductBrandProps }>('product_brands', payload);
-    return response.data;
+export const deleteProduct = async (id: string): Promise<void> => {
+  await del(`foods/${id}`);
 };

@@ -12,7 +12,7 @@ export interface Column {
     image: string;
     updatedAt: string;
     weightage: number;
-    [key: string]: any;
+    [key: string]: string | number | undefined;
 }
 
 export interface CategoriesTableProps {

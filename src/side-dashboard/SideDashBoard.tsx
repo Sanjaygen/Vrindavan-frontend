@@ -13,6 +13,14 @@ import {
   FaRoad,
   FaShoppingBasket,
   FaUsers,
+  FaRegImage,
+  FaGift,
+  FaUser,
+  FaServer,
+  FaFile,
+  FaExchangeAlt,
+  FaGoogleWallet,
+  FaCogs
 } from "react-icons/fa";
 import { FaCarRear } from "react-icons/fa6";
 import {
@@ -212,6 +220,119 @@ const SideDashBoard = () => {
           Localities
         </SubMenuButton>
       </SubMenu>
+      <MenuButton $isOpen={false} $isFirst={false}>
+        <span className="menu-label">
+          <FaRegImage className="menu-icon" />
+          Banner
+        </span>
+      </MenuButton>
+      <MenuButton
+        $isOpen={openMenu === "Deals & Promotions"}
+        $isFirst={false}
+        onClick={() => toggleMenu("Deals & Promotions")}
+      >
+        <span className="menu-label">
+          <FaGift className="menu-icon" /> Deals & Promotions
+        </span>
+        {openMenu === "Deals & Promotions" ? (
+          <KeyboardArrowDownIcon />
+        ) : (
+          <KeyboardArrowLeftIcon />
+        )}
+      </MenuButton>
+      <SubMenu $isOpen={openMenu === "Deals & Promotions"}>
+        <SubMenuButton href="/#">
+          <FaGift className="sub-menu-icon" /> Deal of the Day
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaFolder className="sub-menu-icon" />
+          Featured Category
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaFolder className="sub-menu-icon" />
+          Combo Offer
+        </SubMenuButton>
+      </SubMenu>
+      <MenuButton $isOpen={false} $isFirst={false}>
+        <span className="menu-label">
+          <FaRegImage className="menu-icon" />
+          User Notification
+        </span>
+      </MenuButton>
+      <MenuButton $isOpen={false} $isFirst={false}>
+        <span className="menu-label">
+          <FaShoppingBasket className="menu-icon" />
+          Order Subscriptions
+        </span>
+      </MenuButton>
+      <MenuButton $isOpen={false} $isFirst={false}>
+        <span className="menu-label">
+          <FaUser className="menu-icon" />
+          User Admins
+        </span>
+      </MenuButton>
+      <MenuButton
+        $isOpen={openMenu === "Order Management"}
+        $isFirst={false}
+        onClick={() => toggleMenu("Order Management")}
+      >
+        <span className="menu-label">
+          <FaServer className="menu-icon" /> Order Management
+        </span>
+        {openMenu === "Order Management" ? (
+          <KeyboardArrowDownIcon />
+        ) : (
+          <KeyboardArrowLeftIcon />
+        )}
+      </MenuButton>
+      <SubMenu $isOpen={openMenu === "Order Management"}>
+        <SubMenuButton href="/#">
+          <FaShoppingBasket className="sub-menu-icon" /> Orders
+        </SubMenuButton>
+      </SubMenu>
+      <MenuButton
+        $isOpen={openMenu === "Reports"}
+        $isFirst={false}
+        onClick={() => toggleMenu("Reports")}
+      >
+        <span className="menu-label">
+          <FaFile className="menu-icon" /> Reports
+        </span>
+        {openMenu === "Order Management" ? (
+          <KeyboardArrowDownIcon />
+        ) : (
+          <KeyboardArrowLeftIcon />
+        )}
+      </MenuButton>
+      <SubMenu $isOpen={openMenu === "Reports"}>
+        <SubMenuButton href="/#">
+          <FaFile className="sub-menu-icon" /> Report 
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaUser className="sub-menu-icon" /> Low Balance Customer 
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaUser className="sub-menu-icon" /> Customer Reports 
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaGoogleWallet className="sub-menu-icon" /> Wallet Packages  
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaExchangeAlt className="sub-menu-icon" /> Wallet Transactions  
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaShoppingBasket className="sub-menu-icon" /> Wallet Billings 
+        </SubMenuButton>
+        <SubMenuButton href="/#">
+          <FaShoppingBasket className="sub-menu-icon" /> Wallet Balance History 
+        </SubMenuButton>
+      </SubMenu>
+      <MenuButton $isOpen={false} $isFirst={false}>
+        <span className="menu-label">
+          <FaCogs className="menu-icon" />
+          Global Locality
+        </span>
+      </MenuButton>
     </Sidebar>
   );
 };

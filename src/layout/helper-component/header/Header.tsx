@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Toolbar, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import {
   AppBarWrapper,
-  IconMenuButton,
   SubTileText,
   RightContainer,
   StyledSmallIcon,
   StyledLargeIcon,
+  AdminTypo,
 } from "./Header.styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -29,11 +29,11 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
   };
 
   return (
-    <AppBarWrapper position="fixed">
+    <AppBarWrapper>
       <Toolbar className="p-0">
-        <IconMenuButton edge="start" onClick={toggleDrawer}>
-          <MenuIcon />
-        </IconMenuButton>
+        <IconButton edge="start" onClick={toggleDrawer}>
+          <MenuIcon/>
+        </IconButton>
         <SubTileText>DASHBOARD</SubTileText>
         <RightContainer>
           <IconButton>
@@ -50,13 +50,15 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
             style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
             onClick={handleMenuClick}
           >
-            <KeyboardArrowDownIcon sx={{ color: "black" }} />
-            <Typography
+            <KeyboardArrowDownIcon sx={{ color: "rgba(0, 0, 0, 0.5)", marginRight: "5px" }} />
+            <AdminTypo
               variant="body1"
-              style={{ marginRight: 8, color: "black" }}
             >
               Administrator
-            </Typography>
+            </AdminTypo>
+            <IconButton>
+              <StyledLargeIcon />
+            </IconButton>
           </div>
 
           <Menu
@@ -69,24 +71,24 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
             }}
             transformOrigin={{
               vertical: "top",
-              horizontal: "center",
+              horizontal: "left",
             }}
             PaperProps={{
               style: {
-                marginTop: "45px",
+                marginTop: "-5px",
+                height:"110px",
+                width:"180px",
+                border:"1px solid rgba(0, 0, 0, 0.15)"
               },
             }}
           >
-            <MenuItem onClick={handleClose}>
-              <FaUser style={{ marginRight: "8px" }} /> Profile
+            <MenuItem onClick={handleClose} style={{fontSize:"20px",borderBottom:"1px solid rgba(0, 0, 0, 0.15)"}}>
+              <FaUser style={{ marginRight: "8px",fontSize:"20px" }} /> Profile
             </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <FaEnvelope style={{ marginRight: "8px" }} /> Logout
+            <MenuItem onClick={handleClose} style={{fontSize:"20px"}}>
+              <FaEnvelope style={{ marginRight: "8px",fontSize:"20px" }} /> Logout
             </MenuItem>
           </Menu>
-          <IconButton>
-            <StyledLargeIcon />
-          </IconButton>
         </RightContainer>
       </Toolbar>
     </AppBarWrapper>

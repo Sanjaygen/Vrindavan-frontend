@@ -1,3 +1,4 @@
+"use client"
 import ProductBrandsComponents from "@/page-component/inventory/productBrands/ProductBrands";
 import React from "react";
 

@@ -1,4 +1,4 @@
-
+"use client"
 import CategoriesComponent from "@/page-component/inventory/categories/Categories";
 import React from "react";
 

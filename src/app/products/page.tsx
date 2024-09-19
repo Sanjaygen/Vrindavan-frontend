@@ -1,11 +1,11 @@
-
+"use client"
 import ProductComponent from '@/page-component/inventory/products/Product'
 import React from 'react'
 
-const ProductPage = () => {
+const Productspage = () => {
   return (
-    <div><ProductComponent/> </div>
+    <div><ProductComponent/></div>
   )
 }
 
-export default ProductPage
+export default Productspage

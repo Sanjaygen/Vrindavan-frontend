@@ -5,18 +5,14 @@ import { styled } from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 // ( zindex: ${({ theme }) => theme.zIndex.drawer + 1}; )
 export const AppBarWrapper = styled(Box)`
-  z-index: 1201;
-  background-color: white;
   box-shadow: none;
-  left: 20%;
-  height: 64px;
-  width: 80%;
-  top: 0%;
-  padding: 0 20px;
+  height: 65px;
+  padding: 4px 20px;
   .MuiToolbar-root {
     padding: 0px;
   }
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-bottom: 1px solid #ccc;
 
   ${breakpoints.xs} {
     left: 0%;
@@ -27,43 +23,44 @@ export const AppBarWrapper = styled(Box)`
     width: 100%;
   }
   ${breakpoints.lg} {
+    right:0px;
     left: 18%;
-    width: 90%;
+    width: 100%;
   }
   @media print {
     display: none;
   }
 `;
 
-
-export const IconMenuButton = styled(IconButton)`
-  // display: none;
-
-  @media (max-width: 959px) { 
-    display: block;
-  }
-
-  @media (min-width: 960px) { 
-    // display: none;
-  }
-`;
+export const IconMenu = styled(MenuIcon)`
+    margin-left:15px;
+    ${breakpoints.xs}{
+       margin-left:0px;
+    }
+    ${breakpoints.lg}{
+      margin-left:15px;
+   }
+`
 
 
 export const SubTileText = styled(Typography)`
+  font-family:Poppines,sans-serif;
   font-weight: 400;
-   font-size: 1rem;
+  font-size: 1rem;
   font-display: swap; 
   color: rgba(0, 0, 0, 0.5);
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left:20px;
+  ${breakpoints.xs}{
+    display:none;
+ }
+ ${breakpoints.lg}{
+    display:block; 
+}
 `;
 
-
-
-// export const BoxWrapper = styled(Box)`
-//     // flex-grow: 1;
-// `;
 export const RightContainer = styled(Box)`
   display: flex;
   align-items: center;
@@ -71,26 +68,54 @@ export const RightContainer = styled(Box)`
   gap: 16px;
   overflow: hidden;
   ${breakpoints.xs} {
-    margin-left: auto;
+    margin-left: 40px;
   }
-  ,
   ${breakpoints.md} {
     margin-left: auto;
   }
   ${breakpoints.lg} {
-    margin-left: 800px;
+    margin-left: 750px;
   }
 `;
 
 export const StyledSmallIcon = styled.span`
-  font-size: 18px;
+  font-size: 20px;
+  margin-left:10px;
   color: rgba(0, 0, 0, 0.5);
+  ${breakpoints.xs} {
+    font-size: 15px;
+  }
+  ${breakpoints.lg} {
+    font-size: 20px;
+  }
 `;
 
+export const AdminTypo = styled(Typography)`
+  margin-right: 8px;
+  font-family:Poppines,sans-serif;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5); 
+  font-size: 20px;
+  ${breakpoints.xs} {
+    font-size: 14px;
+  }
+  ${breakpoints.lg} {
+    font-size: 20px;
+  }
+`
+
 export const StyledLargeIcon = styled(FaUserCircle)`
-  font-size: 34px;
-  margin-left: -20px;
+  font-size: 45px;
+  margin-left: 0px;
   color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 50%;
+  ${breakpoints.xs} {
+    font-size: 25px;
+  }
+  ${breakpoints.lg} {
+    font-size: 45px;
+  }
 `;
 
 export const MenuIconStyled = styled(MenuIcon)`

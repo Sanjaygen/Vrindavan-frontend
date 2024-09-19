@@ -6,31 +6,27 @@ import SideNav from './helper-component/sidenav/SideNav';
 // import BreadcrumbsPage from '@/page-components/breadcrumbs/Breadcrumbs';
 import Footer from './helper-component/footer/Footer';
 
-
 export type LayoutProps = {
     children: ReactNode;
 };
-
 const DashboardLayout = ({ children }: LayoutProps) => {
     const [showDrawer, setShowDrawer] = useState(false);
-
+    
     const toggleDrawer = () => {
         setShowDrawer(prev => !prev);
     };
-
-
     return (
         <LayoutContainer>
             <SideNavWrapper>
-                <SideNav/>
+                <SideNav toggleDrawer={toggleDrawer} />
             </SideNavWrapper>
             <PageWrapper>
-                <Header toggleDrawer={toggleDrawer}/>
+                <Header toggleDrawer={toggleDrawer} />
                 {/* <BreadcrumbsPage /> */}
                 <PageBox>{children}</PageBox>
                 <Footer bgColor={'white'} isFixed />
             </PageWrapper>
-            <DrawerStyled   
+            <DrawerStyled
                 showDrawer={showDrawer}
                 title={''}
                 open={showDrawer}
@@ -38,11 +34,10 @@ const DashboardLayout = ({ children }: LayoutProps) => {
                 anchor="left"
             >
                 <SideNavDrawer>
-                    <SideNav/>
+                    <SideNav toggleDrawer={toggleDrawer} />
                 </SideNavDrawer>
             </DrawerStyled>
         </LayoutContainer>
     );
 };
-
 export default DashboardLayout;

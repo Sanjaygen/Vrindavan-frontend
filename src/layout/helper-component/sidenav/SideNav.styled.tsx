@@ -1,3 +1,4 @@
+import breakpoints from "@/themes/breakpoints";
 import { Typography } from "@mui/material";
 import Link from "next/link";
 import { AiFillDashboard } from "react-icons/ai";
@@ -34,49 +35,85 @@ export const SideMenuWrapper = styled("div")`
   }
 `;
 export const SubHead = styled('div')`
+  font-family:Poppins;
+  font-weight: 300 !important;
   font-size: 20px;
   color: black;
   left: 20px;
   position: relative;
-  font-weight: 200;
   display: flex;
+  ${breakpoints.xs}{
+      font-size:15px;
+  }
+  ${breakpoints.lg}{
+    font-size:20px;
+  }
 `;
 export const ContentDiv = styled("div")`
+  position: fixed;
+  top: 0;
+  height:65px;
+  width:304px;
+  background-color: #fff;
+  z-index: 1000;
   border-bottom: 1px solid #ccc;
-  margin-top: 23px;
+  padding-top:10px;
   display: flex;
+  align-items:center;
   img {
     height: 38px;
     width: 38px;
     margin-top: -4px;
     margin-right: 10px;
   }
+  ${breakpoints.xs}{
+    width:270px;
+  }
+  ${breakpoints.lg}{
+    width:304px;
+  }
 `;
-export const DashButton = styled(Link)<DashButtonProps>`
+export const DashButton = styled(Link) <DashButtonProps>`
+  font-family:Poppins;
+  font-weight: 400 !important;
+  font-size: 18px;
   display: flex;
   align-items: center;
   padding: 10px;
-  margin: 5px 0;
+  margin: 65px 0 0 0;
   top: 10px;
   position: relative;
   text-decoration: none;
-  font-size: 16px;
   border-radius: 0px;
   background: none;
-  color: #000000; /* Default black color */
+  color: #343A40;
 
   &:hover {
     background-color: #e2e6ea;
-    color: #007bff; /* Change text color to blue on hover */
+    color: #007bff;
 
     .dash-menu-icon {
-      color: #007bff; /* Change icon color to blue on hover */
+      color: #007bff;
     }
   }
 
   .dash-menu-icon {
+    font-size: 22px;
     margin-right: 20px;
-    color: #000000; /* Default black color for icon */
+    color: #343A40;
+  }
+
+  ${breakpoints.xs}{
+    font-size:14px;
+    .dash-menu-icon {
+      font-size: 18px;
+    }
+  }
+  ${breakpoints.lg}{
+    font-size:18px;
+    .dash-menu-icon {
+      font-size: 22px;
+    }
   }
 `;
 

@@ -10,7 +10,7 @@ export const LayoutContainer = styled(Box)`
 export const SideNavWrapper = styled(Box)`
     position: fixed;
     top: 0;
-    width: 18%;
+    width: 19%;
     align-items: flex-start;
     background-color: white;
     color: black;
@@ -23,10 +23,7 @@ export const SideNavWrapper = styled(Box)`
     ${breakpoints.xs} {
         display: none;
     }
-    ${breakpoints.sm} {
-        display: none;
-    }
-    ${breakpoints.md} {
+    ${breakpoints.lg} {
         display: block;
         height: 100%;
     }
@@ -35,25 +32,21 @@ export const SideNavWrapper = styled(Box)`
 export const PageWrapper = styled('div')`
     flex-basis: 82%;
     margin-left: 20%;
-    padding: 0px 30px 20px 20px;
+    padding: 0px 0px 20px 0px;
     margin-top: 8%;
 
     ${breakpoints.xs} {
-        margin-top: 30%;
+        margin-top: 0%;
         margin-left: 0%;
     }
     ${breakpoints.sm} {
-        margin-top: 15%;
+        margin-top: 0%;
         margin-left: 0%;
     }
-   ${breakpoints.md} {
-        margin-top: 12%;
-        margin-left: 20%;
-    }
 
-    ${breakpoints.md} {
-        margin-top: 8%;
-        margin-left: 20%;
+    ${breakpoints.lg} {
+        margin-top: 0%;
+        margin-left: 19%;
     }
 `;
 export const DrawerStyled = styled(Drawer)<{ showDrawer?: boolean }>`
@@ -63,8 +56,8 @@ export const DrawerStyled = styled(Drawer)<{ showDrawer?: boolean }>`
         display: block;
         z-index: 9999;
     }
-     ${breakpoints.md} {
-        display: block;
+     ${breakpoints.lg} {
+        display: none;
         z-index: 9999;
     }
 `;
@@ -82,7 +75,7 @@ export const SideNavDrawer = styled(Box)`
     },
 
    ${breakpoints.lg} {
-         background-color: primary;
+        background-color: primary;
         color: white;
         height: '100%'
     }

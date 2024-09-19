@@ -9,10 +9,13 @@ import {
   SideMenuWrapper,
   SubHead,
 } from "./SideNav.styled";
+import { useState } from "react";
 
+interface SideNavProps {
+  toggleDrawer: () => void;
+}
 
-
-const SideNav = () => {
+const SideNav = ({toggleDrawer}: SideNavProps) => {
   return (
     <SideMenuWrapper>
       <ContentDiv>
@@ -22,7 +25,7 @@ const SideNav = () => {
         <DashButton href="/#">
           <DashIcon className="dash-menu-icon" /> DASHBOARD
         </DashButton>
-      <SideDashBoard />
+      <SideDashBoard/>
     </SideMenuWrapper>
   );
 };

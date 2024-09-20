@@ -166,7 +166,7 @@ const TabsContainer: React.FC = () => {
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
     if (newTab === "productsList") {
-      router.push("/products");
+      router.push("/inventory/products");
     }
   };
 
@@ -189,7 +189,7 @@ const Breadcrumb: React.FC = () => (
       <IconWrapper><AiFillDashboard /></IconWrapper>
       <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
     </BreadcrumbItem>
-    <BreadcrumbItem><BreadcrumbLink href="/products">Products</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbItem>Create Product</BreadcrumbItem>
   </BreadcrumbContainer>
 );
@@ -222,7 +222,7 @@ const CreateProductComponents: React.FC = () => {
   return (
     <CreateProductWrapper>
       <HeaderWrapper>
-        <HeaderTitle>Create Product</HeaderTitle>
+      <HeaderTitle>Products | Products Management</HeaderTitle>
         <Breadcrumb />
       </HeaderWrapper>
       <ContentWrapper>

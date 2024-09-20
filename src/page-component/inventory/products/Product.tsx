@@ -19,10 +19,11 @@ import {
   IconWrapper,
 } from "./Product.styled";
 import { useProducts } from "@/hooks/useProducts";
-import EditProductPage from "@/app/products/edit/[productId]/page";
+import EditProductPage from "@/app/inventory/products/edit/[productId]/page";
 import { Column } from "@/types/inventory";
-import CreateProductPage from "@/app/products/create/page";
+import CreateProductPage from "@/app/inventory/products/create/page";
 import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeleteProduct";
+import { ProductsColumns } from "@/config/Tables.config";
 
 const Header: React.FC = () => (
   <HeaderTitle>Products | Products Management</HeaderTitle>
@@ -37,7 +38,7 @@ const Breadcrumbs: React.FC = () => (
       <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+      <BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>Products List</BreadcrumbItem>
   </BreadcrumbContainer>
@@ -54,16 +55,16 @@ const ProductTabs: React.FC = () => {
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
     if (newTab === "create") {
-      router.push("/products/create");
+      router.push("/inventory/products/create");
     } else if (newTab === "productList") {
-      router.push("/products");
+      router.push("/inventory/products");
     }
   };
 
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
-    router.push(`/products/edit/${productIdNumber}`);
+    router.push(`/inventory/products/edit/${productIdNumber}`);
   };
 
   const handleDeleteClick = (id: string | number) => {
@@ -81,22 +82,7 @@ const ProductTabs: React.FC = () => {
     { id: "create", label: "Create Product", icon: <AiOutlinePlus /> },
   ];
 
-  const columns: Column[] = [
-    { id: "sno", label: "Sno.", accessor: "sno" },
-    { id: "name", label: "Name", accessor: "name" },
-    {
-      id: "trackInventory",
-      label: "Track Inventory",
-      accessor: "trackInventory",
-    },
-    { id: "image", label: "Image", accessor: "image" },
-    { id: "price", label: "Price", accessor: "price" },
-    { id: "discountPrice", label: "Discount Price", accessor: "discountPrice" },
-    { id: "totalProduct", label: "Total Product", accessor: "totalProduct" },
-    { id: "stockUpdate", label: "Stock Update", accessor: "stockUpdate" },
-    { id: "weightage", label: "Weightage", accessor: "weightage" },
-    { id: "actions", label: "Actions", accessor: "actions" },
-  ];
+
 
   const formattedProducts =
     products?.map((product: any, index: number) => ({
@@ -136,7 +122,7 @@ const ProductTabs: React.FC = () => {
             onExportClose={() => console.log("Export Closed")}
           />
           <CustomTables
-            columns={columns}
+            columns={ProductsColumns}
             rows={formattedProducts}
             onEditClick={handleEditClick}
             onDeleteClick={handleDeleteClick}

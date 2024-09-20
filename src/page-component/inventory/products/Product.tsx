@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   AiFillDashboard,
-  AiOutlinePlus,
   AiOutlineUnorderedList,
-} from "react-icons/ai";
+} from "react-icons/ai"; 
+import { MdOutlineAdd } from "react-icons/md";
 import CustomTables from "@/ui-components/CustomTables/CustomTables";
-import ButtonGroup from "@/ui-components/tabs/helper-components/ButtonGroup";
 import TabsComponent from "@/ui-components/tabs/Tabs";
 import {
   BreadcrumbContainer,
@@ -26,7 +25,7 @@ import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeletePro
 import { ProductsColumns } from "@/config/Tables.config";
 
 const Header: React.FC = () => (
-  <HeaderTitle>Products | Products Management</HeaderTitle>
+  <HeaderTitle>Products | <span> Products Management</span></HeaderTitle>
 );
 
 const Breadcrumbs: React.FC = () => (
@@ -60,7 +59,7 @@ const ProductTabs: React.FC = () => {
       router.push("/inventory/products");
     }
   };
-
+console.log('products',products)
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
@@ -79,7 +78,7 @@ const ProductTabs: React.FC = () => {
       label: "Products List",
       icon: <AiOutlineUnorderedList />,
     },
-    { id: "create", label: "Create Product", icon: <AiOutlinePlus /> },
+    { id: "create", label: "Create Product", icon: <MdOutlineAdd /> },
   ];
 
 
@@ -116,11 +115,6 @@ const ProductTabs: React.FC = () => {
 
       {activeTab === "productList" && (
         <>
-          <ButtonGroup
-            onExportClick={() => console.log("Export Clicked")}
-            anchorElExport={null}
-            onExportClose={() => console.log("Export Closed")}
-          />
           <CustomTables
             columns={ProductsColumns}
             rows={formattedProducts}

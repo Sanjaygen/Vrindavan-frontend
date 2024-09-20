@@ -14,6 +14,12 @@ interface SubMenuButtonProps {
 export const Sidebar = styled.div`
   width: 270px;
   height: 100vh;
+  ${breakpoints.md}{
+    width: 195px;
+  }
+  ${breakpoints.lg}{
+    width: 270px;
+  }
 `;
 
 export const MenuButton = styled.button<MenuButtonProps>`
@@ -65,6 +71,9 @@ export const MenuButton = styled.button<MenuButtonProps>`
       font-size: 18px;
     }
   }
+  ${breakpoints.md}{
+    width: 195px;
+  }
   ${breakpoints.lg}{
     width: 304px;
     .menu-label{
@@ -73,6 +82,9 @@ export const MenuButton = styled.button<MenuButtonProps>`
     .menu-icon{
       font-size: 25px;
     }
+  }
+  ${breakpoints.xl}{
+    width:271px;
   }
 `;
 
@@ -107,11 +119,19 @@ export const SubMenuButton = styled(Link) <SubMenuButtonProps>`
       width: 270px;
     }
   }
+  ${breakpoints.md}{
+    &:hover{
+      width: 195px;
+    }
+  }
   ${breakpoints.lg}{
     font-size: 15px;
     &:hover{
       width: 330px;
     }
+  }
+  ${breakpoints.xl}{
+    width:271px;
   }
 `;
 
@@ -124,10 +144,16 @@ export const SubMenu = styled.div<{ $isOpen: boolean }>`
   ${breakpoints.xs}{
     width: 270px;
   }
+  ${breakpoints.md}{
+    width: 195px;
+  }
   ${breakpoints.lg}{
     width: 304px;
   }
-`; 
+  ${breakpoints.xl}{
+    width:271px;
+  }
+`;
 
 export const AppTitle = styled("p")`
   font-family:Poppins;

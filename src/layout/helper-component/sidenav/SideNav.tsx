@@ -19,7 +19,7 @@ const SideNav = ({toggleDrawer}: SideNavProps) => {
   return (
     <SideMenuWrapper>
       <ContentDiv>
-        <SubHead><span><img src="images/Vrindavan-img.png"/></span> Vrindavan Farm</SubHead>
+        <SubHead><span><img src="/images/Vrindavan-img.png"/></span> Vrindavan Farm</SubHead>
       </ContentDiv>
         {/* <Button onClick={toggleDrawer}>+ Create Menu</Button> */}
         <DashButton href="/#">

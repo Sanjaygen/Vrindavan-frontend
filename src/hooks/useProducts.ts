@@ -9,12 +9,12 @@ import {
 import { ProductProps } from "@/service/types";
 
 export const useProducts = () => {
-  return useQuery(["products"], fetchProducts, {
+  return useQuery(["foods"], fetchProducts, {
     refetchOnWindowFocus: false,
   });
 };
 export const useProductById = (productId: number) => {
-  return useQuery(["products", productId], () => fetchProductById(productId), {
+  return useQuery(["foods", productId], () => fetchProductById(productId), {
     refetchOnWindowFocus: false,
   });
 };
@@ -26,7 +26,7 @@ export const useCreateProduct = () => {
   return useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries(["foods"]);
     },
   });
 };
@@ -39,7 +39,7 @@ export const useUpdateProduct = () => {
     mutationFn: ({ id, payload }: { id: string; payload: ProductProps }) =>
       updateProduct(id, payload),
     onSuccess: () => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries(["foods"]);
     },
   });
 };
@@ -51,7 +51,7 @@ export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: (id: string) => deleteProduct(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries(["foods"]);
     },
     onError: (error: Error) => {
       console.error('Error deleting product:', error);

@@ -1,8 +1,8 @@
 export const ScreenSize = {
-    xs: 320,
-    sm: 640,
-    md: 768,
-    lg: 1024,
-    xl: 1440,
-    '2xl': 1536,
+    xs: 390,
+    sm: 768,
+    md: 1024,
+    lg: 1440,
+    xl: 1570,
+    '2xl': 1636,
 };

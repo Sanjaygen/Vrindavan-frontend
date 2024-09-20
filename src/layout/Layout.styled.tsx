@@ -23,7 +23,7 @@ export const SideNavWrapper = styled(Box)`
     ${breakpoints.xs} {
         display: none;
     }
-    ${breakpoints.lg} {
+    ${breakpoints.md} {
         display: block;
         height: 100%;
     }
@@ -44,11 +44,15 @@ export const PageWrapper = styled('div')`
         margin-left: 0%;
     }
 
-    ${breakpoints.lg} {
+    ${breakpoints.md} {
         margin-top: 0%;
         margin-left: 19%;
     }
 `;
+
+export const FooterWrap = styled("div")`
+    margin-top: 4.5%;
+`
 export const DrawerStyled = styled(Drawer)<{ showDrawer?: boolean }>`
     display: ${({ showDrawer }) => (showDrawer ? 'block' : 'none')};
 

@@ -55,10 +55,10 @@ export const SubTileText = styled(Typography)`
   padding-left:20px;
   ${breakpoints.xs}{
     display:none;
- }
- ${breakpoints.lg}{
+  }
+  ${breakpoints.sm}{
     display:block; 
-}
+  }
 `;
 
 export const RightContainer = styled(Box)`
@@ -70,11 +70,17 @@ export const RightContainer = styled(Box)`
   ${breakpoints.xs} {
     margin-left: 40px;
   }
+  ${breakpoints.sm} {
+    margin-left: 290px;
+  }
   ${breakpoints.md} {
     margin-left: auto;
   }
   ${breakpoints.lg} {
-    margin-left: 750px;
+    margin-left: 770px;
+  }
+  ${breakpoints.xl}{
+    margin-left: 660px;
   }
 `;
 

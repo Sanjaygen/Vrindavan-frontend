@@ -7,7 +7,7 @@ const breakpointsMinWidth = {
     sm: `(min-width: ${screenWidths[1]}px)`, // (576+),portrait, tablet, small desktop screen
     md: `(min-width: ${screenWidths[2]}px)`, // (768+) //landscape, medium desktop screen
     lg: `(min-width: ${screenWidths[3]}px)`, // (1024+), large desktop screen
-    xl: `(min-width: ${screenWidths[4]}px)`, // (1440+, extra) large desktop screen
+    xl: `(max-width: ${screenWidths[4]}px)`, // (1440+, extra) large desktop screen
     '2xl': `(min-width: ${screenWidths[5]}px)` // (1536+, extra) large desktop screen
 };
 

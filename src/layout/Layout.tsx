@@ -1,7 +1,7 @@
 'use client';
 import { ReactNode, useState } from 'react';
 import Header from './helper-component/header/Header';
-import { DrawerStyled, LayoutContainer, PageBox, PageWrapper, SideNavDrawer, SideNavWrapper } from './Layout.styled';
+import { DrawerStyled, FooterWrap, LayoutContainer, PageBox, PageWrapper, SideNavDrawer, SideNavWrapper } from './Layout.styled';
 import SideNav from './helper-component/sidenav/SideNav';
 // import BreadcrumbsPage from '@/page-components/breadcrumbs/Breadcrumbs';
 import Footer from './helper-component/footer/Footer';
@@ -11,7 +11,7 @@ export type LayoutProps = {
 };
 const DashboardLayout = ({ children }: LayoutProps) => {
     const [showDrawer, setShowDrawer] = useState(false);
-    
+
     const toggleDrawer = () => {
         setShowDrawer(prev => !prev);
     };
@@ -24,7 +24,9 @@ const DashboardLayout = ({ children }: LayoutProps) => {
                 <Header toggleDrawer={toggleDrawer} />
                 {/* <BreadcrumbsPage /> */}
                 <PageBox>{children}</PageBox>
-                <Footer bgColor={'white'} isFixed />
+                <FooterWrap>
+                    <Footer bgColor={'white'} isFixed />
+                </FooterWrap>
             </PageWrapper>
             <DrawerStyled
                 showDrawer={showDrawer}

@@ -1,5 +1,5 @@
 import { Typography, Link } from '@mui/material';
-import { FooterWrapper, LeftSection, RightSection } from './Footer.styled';
+import { CopyTypo, FooterWrapper, LeftSection, LinkTag, RightSection, RightsTypo, VersionTypo } from './Footer.styled';
 
 type FooterProps = {
     bgColor: string;
@@ -15,14 +15,15 @@ const Footer = ({ bgColor, isFixed = false }: FooterProps) => {
     return (
         <FooterWrapper bgColor={bgColor} isFixed={isFixed}>
             <LeftSection>
-                <Typography variant="body1">Copyright @ {getCurrentYear()}</Typography>
-                <Link href="https://example.com" color="primary" underline="none">
-                    VrindavanFarm
-                </Link>
-                <Typography variant="body1">.All rights reserved</Typography>
+                <CopyTypo variant="body1">Copyright © {getCurrentYear()} 
+                    <LinkTag href="https://example.com">
+                        Vrindavan Farm.
+                    </LinkTag>
+                </CopyTypo>
+                <RightsTypo variant="body1">All rights reserved</RightsTypo>
             </LeftSection>
             <RightSection>
-                <Typography variant="body1">Version 2.6.0</Typography>
+                <VersionTypo variant="body1">Version <span>2.6.0</span></VersionTypo>
             </RightSection>
         </FooterWrapper>
     );

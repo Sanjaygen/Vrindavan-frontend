@@ -56,19 +56,19 @@ const SideDashBoard = () => {
         )}
       </MenuButton>
       <SubMenu $isOpen={openMenu === "inventory"}>
-        <SubMenuButton href="/products">
+        <SubMenuButton href="/inventory/products">
           <FaProductHunt className="sub-menu-icon" /> Products
         </SubMenuButton>
-        <SubMenuButton href="/categories">
+        <SubMenuButton href="/inventory/categories">
           <FaFolder className="sub-menu-icon" /> Categories
         </SubMenuButton>
-        <SubMenuButton href="/subCategories">
+        <SubMenuButton href="/inventory/subCategories">
           <FaFolder className="sub-menu-icon" /> Sub Categories
         </SubMenuButton>
-        <SubMenuButton href="/productBrands">
+        <SubMenuButton href="/inventory/productBrands">
           <FaFolder className="sub-menu-icon" /> Product Brands
         </SubMenuButton>
-        <SubMenuButton href="/productTypes">
+        <SubMenuButton href="/inventory/productTypes">
           <FaFolder className="sub-menu-icon" /> Product Types
         </SubMenuButton>
       </SubMenu>

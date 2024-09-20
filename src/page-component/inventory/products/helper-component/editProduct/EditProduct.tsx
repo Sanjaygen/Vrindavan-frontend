@@ -244,7 +244,7 @@ const Breadcrumbs: React.FC = () => (
       <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+      <BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>Edit Product</BreadcrumbItem>
   </BreadcrumbContainer>
@@ -259,9 +259,9 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ product }) => {
 
   const handleTabChange = (newTab: string) => {
     if (newTab === "productsList") {
-      router.push("/products");
+      router.push("/inventory/products");
     } else if (newTab === "create") {
-      router.push("/products/create");
+      router.push("/inventory/products/create");
     }
   };
 
@@ -302,7 +302,7 @@ const EditProductComponent: React.FC<EditProductProps> = ({ productId }) => {
   return (
     <CreateProductWrapper>
       <HeaderWrapper>
-        <HeaderTitle>Edit Product</HeaderTitle>
+      <HeaderTitle>Products | Products Management</HeaderTitle>
         <Breadcrumbs />
       </HeaderWrapper>
       <ContentWrapper>

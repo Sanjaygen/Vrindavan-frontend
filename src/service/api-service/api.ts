@@ -1,19 +1,27 @@
-import { ServiceApi } from "@/config/ServiceConfig";
+import { ServiceApi } from "../../config/ServiceConfig";
 
-const handleResponse = async (response: Response) => {
-  const data = await response.json();
+interface ApiResponse<T> {
+  data: T;
+  message?: string;
+}
+
+const handleResponse = async <T>(response: Response): Promise<T> => {
+  const data: ApiResponse<T> = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Something went wrong");
+    const errorMessage = data.message || "Something went wrong";
+    console.error("API Error:", errorMessage);
+    throw new Error(errorMessage);
   }
-  return data;
+  return data.data;
 };
 
-const buildHeaders = async (options: RequestInit) => {
+const buildHeaders = async (options: RequestInit): Promise<Headers> => {
   const headers = new Headers(options.headers || {});
   if (!(options.body instanceof FormData)) {
     headers.append("Content-Type", "application/json");
   }
-  headers.append("Authorization", `Bearer YOUR_TOKEN_HERE`);
+  const token = "YOUR_TOKEN_HERE";
+  headers.append("Authorization", `Bearer ${token}`);
   return headers;
 };
 
@@ -28,21 +36,28 @@ const customFetch = async <T>(
       ...options,
       headers,
     });
-    return handleResponse(response);
+    return handleResponse<T>(response);
   } catch (error) {
+    console.error("API request failed:", error);
     throw error;
   }
 };
 
 export const get = async <T>(url: string): Promise<T> => {
-  return customFetch(url, { method: "GET" });
+  return customFetch<T>(url, { method: "GET" });
 };
 
-export const post = async <T>(url: string, data: any): Promise<T> =>
-  customFetch(url, { method: "POST", body: JSON.stringify(data) });
+export const post = async <T>(
+  url: string,
+  data: Record<string, unknown>
+): Promise<T> =>
+  customFetch<T>(url, { method: "POST", body: JSON.stringify(data) });
 
-export const update = async <T>(url: string, data: any): Promise<T> =>
-  customFetch(url, {
-    method: "PUT",
-    body: JSON.stringify(data),
-  });
+export const update = async <T>(
+  url: string,
+  data: Record<string, unknown>
+): Promise<T> =>
+  customFetch<T>(url, { method: "PUT", body: JSON.stringify(data) });
+
+export const del = async <T>(url: string): Promise<T> =>
+  customFetch<T>(url, { method: "DELETE" });

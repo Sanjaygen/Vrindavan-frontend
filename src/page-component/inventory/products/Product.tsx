@@ -6,9 +6,7 @@ import {
 } from "react-icons/ai"; 
 import { MdOutlineAdd } from "react-icons/md";
 import CustomTables from "@/ui-components/CustomTables/CustomTables";
-import ButtonGroup from "@/ui-components/tabs/helper-components/ButtonGroup";
-import TabsComponent from "@/ui-components/tabs/Tabs"; 
-import { columns, rows } from "../../../config/Tables.config";
+import TabsComponent from "@/ui-components/tabs/Tabs";
 import {
   BreadcrumbContainer,
   BreadcrumbItem,
@@ -19,8 +17,12 @@ import {
   HeaderWrapper,
   IconWrapper,
 } from "./Product.styled";
-import CreateProduct from "./helper-component/createProduct/CreateProduct";
-import EditProductComponent from "./helper-component/editProduct/EditProduct";
+import { useProducts } from "@/hooks/useProducts";
+import EditProductPage from "@/app/inventory/products/edit/[productId]/page";
+import { Column } from "@/types/inventory";
+import CreateProductPage from "@/app/inventory/products/create/page";
+import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeleteProduct";
+import { ProductsColumns } from "@/config/Tables.config";
 
 const Header: React.FC = () => (
   <HeaderTitle>Products | <span> Products Management</span></HeaderTitle>
@@ -35,7 +37,7 @@ const Breadcrumbs: React.FC = () => (
       <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+      <BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbItem>Products List</BreadcrumbItem>
   </BreadcrumbContainer>
@@ -43,28 +45,65 @@ const Breadcrumbs: React.FC = () => (
 
 const ProductTabs: React.FC = () => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("productList");
+  const [activeTab, setActiveTab] = useState<string>("productList");
   const [productId, setProductId] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const { data: products, isLoading, error } = useProducts() as any;
 
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
     if (newTab === "create") {
-      router.push("/products/create");
+      router.push("/inventory/products/create");
     } else if (newTab === "productList") {
-      router.push("/products");
+      router.push("/inventory/products");
     }
   };
-
+console.log('products',products)
   const handleEditClick = (id: string | number) => {
-    setProductId(id.toString());
+    const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
-    router.push(`/products/edit/${id}`);
+    router.push(`/inventory/products/edit/${productIdNumber}`);
   };
 
+  const handleDeleteClick = (id: string | number) => {
+    setProductId(typeof id === "string" ? id : String(id));
+    setOpenDialog(true);
+  };
+
+
   const tabsData = [
-    { id: "productList", label: "Products List", icon: <AiOutlineUnorderedList /> },
+    {
+      id: "productList",
+      label: "Products List",
+      icon: <AiOutlineUnorderedList />,
+    },
     { id: "create", label: "Create Product", icon: <MdOutlineAdd /> },
   ];
+
+
+
+  const formattedProducts =
+    products?.map((product: any, index: number) => ({
+      sno: index + 1,
+      name: product.name || "N/A",
+      price: product.price || "N/A",
+      discountPrice: product.discount_price || "N/A",
+      image: product.image || "N/A",
+      totalProduct: product.package_items_count || 0,
+      stockUpdate: product.weight || "N/A",
+      weightage: product.weightage || "N/A",
+      id: product.id,
+      actions: (
+        <>
+          <button onClick={() => handleEditClick(product.id)}>Edit</button>
+          <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
+        </>
+      ),
+    })) || [];
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products</div>;
 
   return (
     <ContentWrapper>
@@ -77,24 +116,24 @@ const ProductTabs: React.FC = () => {
       {activeTab === "productList" && (
         <>
           <CustomTables
-            columns={columns}
-            rows={rows}
+            columns={ProductsColumns}
+            rows={formattedProducts}
             onEditClick={handleEditClick}
+            onDeleteClick={handleDeleteClick}
           />
         </>
       )}
 
-      {activeTab === "create" && (
-        <div>
-          <CreateProduct />
-        </div>
-      )}
+      {activeTab === "create" && <CreateProductPage />}
 
-      {activeTab === "edit" && productId && (
-        <div>
-          <EditProductComponent productId={productId} />
-        </div>
-      )}
+      {activeTab === "edit" && productId && <EditProductPage />}
+
+
+      <DeleteConfirmationDialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        productId={productId}
+      />
     </ContentWrapper>
   );
 };

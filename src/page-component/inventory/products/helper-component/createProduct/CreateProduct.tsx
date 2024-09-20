@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Tabs from "@/ui-components/tabs/Tabs";
 import { AiFillDashboard, AiOutlinePlus, AiOutlineUnorderedList } from "react-icons/ai";
 import { FaUndo } from "react-icons/fa";
 import { IoIosSave } from "react-icons/io";
@@ -31,6 +30,16 @@ import {
   ContentWrapper,
   Input,
 } from "./CreateProduct.styled";
+import { Controller, useForm } from "react-hook-form";
+import { useCreateProduct } from "@/hooks/useProducts";
+import Tabs from "@/ui-components/tabs/Tabs";
+
+// Types
+interface FormData {
+  name: string;
+  description: string;
+  weightage: string;
+}
 
 interface CreateBoxProps {
   image: string | null;
@@ -40,6 +49,7 @@ interface CreateBoxProps {
   handleRemoveImage: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
+// CreateInputFields Component
 const CreateInputFields: React.FC<CreateBoxProps> = ({
   image,
   fileInputRef,
@@ -47,7 +57,24 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
   handleFileChange,
   handleRemoveImage,
 }) => {
-  const hasImage = Boolean(image);
+  const { control, handleSubmit, setValue } = useForm<FormData>({
+    defaultValues: {
+      name: '',
+      description: '',
+      weightage: '',
+    }
+  });
+
+  const { mutate: createProduct } = useCreateProduct();
+
+  const onSubmit = async (data: FormData) => {
+    const payload = {
+      ...data,
+      image,
+    };
+
+    await createProduct(payload);
+  };
 
   return (
     <FormContainer>
@@ -55,7 +82,11 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
         <FormRow>
           <Label htmlFor="name">Name *</Label>
           <InputContainer>
-            <Input type="text" placeholder="Insert Name" id="name" />
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => <Input {...field} placeholder="Insert Name" id="name" />}
+            />
             <HelperText>Insert Name</HelperText>
           </InputContainer>
         </FormRow>
@@ -63,7 +94,10 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
         <FormRow>
           <Label htmlFor="description">Description *</Label>
           <InputContainer>
-            <NoteToolbar value={""} onChange={() => {}} />
+            <NoteToolbar
+              value={control._formValues?.description || ""}
+              onChange={(value) => setValue('description', value)}
+            />
             <HelperText>Insert Description</HelperText>
           </InputContainer>
         </FormRow>
@@ -71,7 +105,11 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
         <FormRow>
           <Label htmlFor="weightage">Weightage *</Label>
           <InputContainer>
-            <Input type="text" placeholder="Enter Weightage" id="weightage" />
+            <Controller
+              name="weightage"
+              control={control}
+              render={({ field }) => <Input {...field} placeholder="Enter Weightage" id="weightage" />}
+            />
             <HelperText>Enter Weight</HelperText>
           </InputContainer>
         </FormRow>
@@ -80,23 +118,16 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
       <FormRow>
         <Label htmlFor="images">Image</Label>
         <InputContainer>
-          <UploadArea hasImage={hasImage} onClick={handleUploadClick}>
-            {!hasImage ? (
+          <UploadArea hasImage={!!image} onClick={handleUploadClick}>
+            {!image ? (
               <>
-                <UploadIcon>
-                  <MdCloudUpload />
-                </UploadIcon>
+                <UploadIcon><MdCloudUpload /></UploadIcon>
                 <UploadText>Drop files here to upload</UploadText>
               </>
             ) : (
               <div>
                 <ImagePreview>
-                  <img
-                    src={image!}
-                    alt="Uploaded Preview"
-                    width={200}
-                    height={200}
-                  />
+                  <img src={image} alt="Uploaded Preview" width={200} height={200} />
                 </ImagePreview>
                 <RemoveLink onClick={handleRemoveImage}>Remove file</RemoveLink>
               </div>
@@ -112,22 +143,22 @@ const CreateInputFields: React.FC<CreateBoxProps> = ({
           <HelperText>Insert image in SVG format</HelperText>
         </InputContainer>
       </FormRow>
+
       <StyledButton variant="outlined">From Media</StyledButton>
       <StyledHr />
       <ButtonsContainer>
-        <StyledButton variant="outlined">
-          <IoIosSave />
-          Save Category
+        <StyledButton variant="outlined" onClick={handleSubmit(onSubmit)}>
+          <IoIosSave /> Save Category
         </StyledButton>
         <StyledButton variant="outlined">
-          <FaUndo />
-          Cancel
+          <FaUndo /> Cancel
         </StyledButton>
       </ButtonsContainer>
     </FormContainer>
   );
 };
 
+// TabsContainer Component
 const TabsContainer: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("create");
   const router = useRouter();
@@ -135,7 +166,7 @@ const TabsContainer: React.FC = () => {
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
     if (newTab === "productsList") {
-      router.push("/products");
+      router.push("/inventory/products");
     }
   };
 
@@ -144,43 +175,31 @@ const TabsContainer: React.FC = () => {
       activeTab={activeTab}
       setActiveTab={handleTabChange}
       tabItems={[
-        {
-          id: "productsList",
-          label: "Products List",
-          icon: <AiOutlineUnorderedList /> 
-        },
-        {
-          id: "create",
-          label: "Create Product",
-          icon: <AiOutlinePlus />
-        },
+        { id: "productsList", label: "Products List", icon: <AiOutlineUnorderedList /> },
+        { id: "create", label: "Create Product", icon: <AiOutlinePlus /> },
       ]}
     />
   );
 };
 
+// Breadcrumb Component
 const Breadcrumb: React.FC = () => (
   <BreadcrumbContainer>
     <BreadcrumbItem>
-      <IconWrapper>
-        <AiFillDashboard />
-      </IconWrapper>
+      <IconWrapper><AiFillDashboard /></IconWrapper>
       <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
     </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
-    </BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbItem>Create Product</BreadcrumbItem>
   </BreadcrumbContainer>
 );
 
+// CreateProductComponents Component
 const CreateProductComponents: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
-  };
+  const handleUploadClick = () => fileInputRef.current?.click();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -203,7 +222,7 @@ const CreateProductComponents: React.FC = () => {
   return (
     <CreateProductWrapper>
       <HeaderWrapper>
-        <HeaderTitle>Create Product</HeaderTitle>
+      <HeaderTitle>Products | Products Management</HeaderTitle>
         <Breadcrumb />
       </HeaderWrapper>
       <ContentWrapper>

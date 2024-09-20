@@ -77,7 +77,7 @@ export const RightContainer = styled(Box)`
     margin-left: auto;
   }
   ${breakpoints.lg} {
-    margin-left: 790px;
+    margin-left: 770px;
   }
   ${breakpoints.xl}{
     margin-left: 660px;

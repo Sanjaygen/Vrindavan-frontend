@@ -9,9 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { HeaderContainer, IconDiv, LeftControls, PageButton, PaginationButtons, PaginationContainer, PaginationInfo, PaperContnent, RightControls, SearchContainer, SearchIcon, SearchInput, TableContent } from './CustomTables.styled';
-import { DashboardTableProps } from '@/types/inventory';
+import { DashboardTableProps, Column } from '@/types/inventory';
 
-const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClick }) => {
+const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClick, onDeleteClick }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -45,8 +45,8 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
 
   const filteredRows = rows.filter((row) =>
     columns.some((column) =>
-      row[column.id]
-        ?.toString()
+      (row[column.accessor] as string)
+        .toString()
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
     )
@@ -98,10 +98,10 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align={column.align}
+                  align="left"
                   sx={{
-                    minWidth: column.minWidth, fontFamily: "Poppins,sans-serif",
-                    fontSize:{ sm:"12px",md:"17px"},
+                    fontFamily: "Poppins,sans-serif",
+                    fontSize: { sm: "12px", md: "17px" },
                     fontWeight: "bold"
                   }}
                 >
@@ -113,71 +113,62 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
           <TableBody>
             {filteredRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, rowIndex) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={rowIndex}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.id === "image" ? (
-                          <img
-                            src={value as string}
-                            alt="Image"
-                            style={{
-                              width: '50px', height: '50px', fontFamily: "Poppins,sans-serif",
-                              fontSize: "15px",
-                            }}
+              .map((row, index) => (
+                <TableRow key={index}>
+                  {columns.map((column) => (
+                    <TableCell key={column.id} align="left">
+                      {column.accessor === 'actions' ? (
+                        <div>
+                          <FaRegEdit
+                            onClick={() => onEditClick(row.id)}
+                            style={{ cursor: 'pointer', marginRight: '10px' }}
                           />
-                        ) : column.id === "updatedAt" ? (
-                          new Date(value as string).toLocaleDateString()
-                        ) : column.id === "action" ? (
-                          <>
-                            <FaRegEdit
-                              style={{
-                                cursor: "pointer",
-                                marginRight: 8,
-                                color: "#007bff",
-                              }}
-                              onClick={() => onEditClick(row.sNo)} // Call with the row ID
-                            />
-                            <FaRegTrashAlt
-                              style={{ cursor: "pointer", color: "#dc3545" }}
-                            />
-                          </>
-                        ) : column.format && typeof value === "number" ? (
-                          column.format(value)
-                        ) : (
-                          value
-                        )}
-                      </TableCell>
-                    );
-                  })}
+                          <FaRegTrashAlt
+                            onClick={() => onDeleteClick(row.id)}
+                            style={{ cursor: 'pointer' }}
+                          />
+                        </div>
+                      ) : (
+                        row[column.accessor]
+                      )}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
+            {filteredRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+              <TableRow key={index}>
+                {columns.map((column) => (
+                  <TableCell key={column.id} align="left">
+                    {column.accessor === 'actions' ? (
+                      <div>
+                        <FaRegEdit
+                          onClick={() => onEditClick(row.id)}
+                          style={{ cursor: 'pointer', marginRight: '10px' }}
+                        />
+                        <FaRegTrashAlt
+                          onClick={() => onDeleteClick(row.id)}
+                          style={{ cursor: 'pointer' }}
+                        />
+                      </div>
+                    ) : (
+                      row[column.accessor]
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </TableContent>
       </TableContainer>
       <PaginationContainer>
         <PaginationInfo>
-          {`Showing ${startEntry} to ${endEntry} of ${filteredRows.length} entries`}
+          Showing {startEntry} to {endEntry} of {filteredRows.length} entries
         </PaginationInfo>
         <PaginationButtons>
           <PageButton onClick={handlePreviousPage} disabled={page === 0}>
             Previous
           </PageButton>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <PageButton
-              key={index}
-              active={index === page}
-              onClick={() => handlePageChange(index)}
-            >
-              {index + 1}
-            </PageButton>
-          ))}
-          <PageButton
-            onClick={handleNextPage}
-            disabled={page === totalPages - 1}
-          >
+          <PageButton onClick={handleNextPage} disabled={page >= totalPages - 1}>
             Next
           </PageButton>
         </PaginationButtons>

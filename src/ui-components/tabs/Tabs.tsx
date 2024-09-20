@@ -1,5 +1,6 @@
 import React from "react";
-import { TabIcon, TabList, TabListItem } from "./Tabs.styled";
+import { MainTab, TabIcon, TabList, TabListItem } from "./Tabs.styled";
+import ButtonGroup from "./helper-components/ButtonGroup";
 
 interface TabItem {
   id: string;
@@ -15,6 +16,7 @@ interface TabsProps {
 
 const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab, tabItems }) => {
   return (
+    <MainTab>
     <TabList>
       {tabItems.map((item) => (
         <TabListItem
@@ -27,6 +29,12 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab, tabItems }) => {
         </TabListItem>
       ))}
     </TabList>
+    <ButtonGroup
+    onExportClick={() => console.log("Export Clicked")}
+    anchorElExport={null}
+    onExportClose={() => console.log("Export Closed")}
+  />
+  </MainTab>
   );
 };
 

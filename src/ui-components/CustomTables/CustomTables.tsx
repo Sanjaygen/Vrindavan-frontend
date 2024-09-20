@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { HeaderContainer, LeftControls, PageButton, PaginationButtons, PaginationContainer, PaginationInfo, RightControls, SearchContainer, SearchIcon, SearchInput } from './CustomTables.styled';
+import { HeaderContainer, IconDiv, LeftControls, PageButton, PaginationButtons, PaginationContainer, PaginationInfo, PaperContnent, RightControls, SearchContainer, SearchIcon, SearchInput, TableContent } from './CustomTables.styled';
 import { DashboardTableProps } from '@/types/inventory';
 
 const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClick }) => {
@@ -56,7 +56,7 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
   const endEntry = Math.min((page + 1) * rowsPerPage, filteredRows.length);
 
   return (
-    <Paper style={{ width: '100%', overflow: 'hidden' }}>
+    <PaperContnent>
       <HeaderContainer>
         <LeftControls>
           <span style={{ marginRight: "10px" }}>Show</span>
@@ -68,7 +68,8 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
             <Select
               value={rowsPerPage}
               onChange={handleRowsPerPageChange}
-              label="Entries"
+              displayEmpty
+              inputProps={{ 'aria-label': 'Without label' }}
             >
               <MenuItem value={10}>10</MenuItem>
               <MenuItem value={25}>25</MenuItem>
@@ -77,7 +78,7 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
           </FormControl>
           <span>Entries</span>
         </LeftControls>
-        
+
         <RightControls>
           <SearchContainer>
             <SearchInput
@@ -86,19 +87,23 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
               value={searchQuery}
               onChange={handleSearchChange}
             />
+            <IconDiv><SearchIcon /></IconDiv>
           </SearchContainer>
-          <SearchIcon />
         </RightControls>
       </HeaderContainer>
-      <TableContainer style={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+      <TableContainer>
+        <TableContent stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth, fontWeight: 'bold' }}
+                  sx={{
+                    minWidth: column.minWidth, fontFamily: "Poppins,sans-serif",
+                    fontSize:{ sm:"12px",md:"17px"},
+                    fontWeight: "bold"
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -118,7 +123,10 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
                           <img
                             src={value as string}
                             alt="Image"
-                            style={{ width: '50px', height: '50px' }}
+                            style={{
+                              width: '50px', height: '50px', fontFamily: "Poppins,sans-serif",
+                              fontSize: "15px",
+                            }}
                           />
                         ) : column.id === "updatedAt" ? (
                           new Date(value as string).toLocaleDateString()
@@ -147,7 +155,7 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
                 </TableRow>
               ))}
           </TableBody>
-        </Table>
+        </TableContent>
       </TableContainer>
       <PaginationContainer>
         <PaginationInfo>
@@ -174,7 +182,7 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
           </PageButton>
         </PaginationButtons>
       </PaginationContainer>
-    </Paper>
+    </PaperContnent>
   );
 };
 

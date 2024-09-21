@@ -75,16 +75,13 @@ export const MenuButton = styled.button<MenuButtonProps>`
     width: 195px;
   }
   ${breakpoints.lg}{
-    width: 304px;
+    width: 270px;
     .menu-label{
-      font-size: 18px;
+      font-size: 16px;
     }
     .menu-icon{
       font-size: 25px;
     }
-  }
-  ${breakpoints.xl}{
-    width:271px;
   }
 `;
 
@@ -125,13 +122,10 @@ export const SubMenuButton = styled(Link) <SubMenuButtonProps>`
     }
   }
   ${breakpoints.lg}{
-    font-size: 15px;
+    font-size: 13px;
     &:hover{
-      width: 330px;
+      width: 270px;
     }
-  }
-  ${breakpoints.xl}{
-    width:271px;
   }
 `;
 
@@ -148,10 +142,7 @@ export const SubMenu = styled.div<{ $isOpen: boolean }>`
     width: 195px;
   }
   ${breakpoints.lg}{
-    width: 304px;
-  }
-  ${breakpoints.xl}{
-    width:271px;
+    width: 270px;
   }
 `;
 

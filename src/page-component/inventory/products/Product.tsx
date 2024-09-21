@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import {
   AiFillDashboard,
   AiOutlineUnorderedList,
-} from "react-icons/ai"; 
+} from "react-icons/ai";
 import { MdOutlineAdd } from "react-icons/md";
 import CustomTables from "@/ui-components/CustomTables/CustomTables";
 import TabsComponent from "@/ui-components/tabs/Tabs";
@@ -59,7 +59,7 @@ const ProductTabs: React.FC = () => {
       router.push("/inventory/products");
     }
   };
-console.log('products',products)
+  console.log('products', products)
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
@@ -84,23 +84,24 @@ console.log('products',products)
 
 
   const formattedProducts =
-    products?.map((product: any, index: number) => ({
-      sno: index + 1,
-      name: product.name || "N/A",
-      price: product.price || "N/A",
-      discountPrice: product.discount_price || "N/A",
-      image: product.image || "N/A",
-      totalProduct: product.package_items_count || 0,
-      stockUpdate: product.weight || "N/A",
-      weightage: product.weightage || "N/A",
-      id: product.id,
-      actions: (
-        <>
-          <button onClick={() => handleEditClick(product.id)}>Edit</button>
-          <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
-        </>
-      ),
-    })) || [];
+    Array.isArray(products)
+      ? products.map((product: any, index: number) => ({
+        sno: index + 1,
+        name: product.name || "N/A",
+        price: product.price || "N/A",
+        discountPrice: product.discount_price || "N/A",
+        image: product.image || "N/A",
+        totalProduct: product.package_items_count || 0,
+        stockUpdate: product.weight || "N/A",
+        weightage: product.weightage || "N/A",
+        id: product.id,
+        actions: (
+          <>
+            <button onClick={() => handleEditClick(product.id)}>Edit</button>
+            <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
+          </>
+        ),
+      })) : [];
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;

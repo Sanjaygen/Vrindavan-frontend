@@ -27,6 +27,9 @@ export const SideNavWrapper = styled(Box)`
         display: block;
         height: 100%;
     }
+    ${breakpoints.xl}{
+        width: 17%;
+    }
 `;
 
 export const PageWrapper = styled('div')`
@@ -47,6 +50,10 @@ export const PageWrapper = styled('div')`
     ${breakpoints.md} {
         margin-top: 0%;
         margin-left: 19%;
+    }
+    ${breakpoints.lg} {
+        margin-top: 0%;
+        margin-left: 17%;
     }
 `;
 

@@ -46,13 +46,12 @@ export const HeaderTitle = styled.div`
      font-size: 13px;
      margin-left:10px;
   }
-  }
   ${breakpoints.lg}{
-    font-size: 25px;
+    font-size: 22px;
+    margin-left: 30px;
     span{
-     font-size: 22px;
+     font-size: 20px;
      margin-left:10px;
-  }
   }
 `;
 
@@ -85,7 +84,7 @@ export const BreadcrumbItem = styled.span`
     font-size: 15px;
   }
   ${breakpoints.lg}{
-    font-size: 25px;
+    font-size: 20px;
   }
 `;
 
@@ -106,7 +105,7 @@ export const BreadcrumbLink = styled(Link)`
     font-size: 15px;
   }
   ${breakpoints.lg}{
-    font-size: 25px;
+    font-size: 20px;
   }
 `;
 

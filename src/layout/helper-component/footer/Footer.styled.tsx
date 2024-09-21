@@ -75,7 +75,7 @@ export const LinkTag = styled(Link)`
         font-size: 16px;
     }
     ${breakpoints.lg}{
-        font-size: 20px;
+        font-size: 18px;
     }
 `
 export const RightsTypo = styled(Typography)`
@@ -90,7 +90,7 @@ export const RightsTypo = styled(Typography)`
         font-size: 16px;
     }
     ${breakpoints.lg}{
-        font-size: 20px;
+        font-size: 18px;
     }
 `
 export const VersionTypo = styled(Typography)`
@@ -108,7 +108,7 @@ export const VersionTypo = styled(Typography)`
         font-size: 16px;
     }
     ${breakpoints.lg}{
-        font-size: 20px;
+        font-size: 18px;
     }
 `
 

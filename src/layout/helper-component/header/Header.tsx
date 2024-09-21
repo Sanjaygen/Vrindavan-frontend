@@ -7,6 +7,8 @@ import {
   StyledSmallIcon,
   StyledLargeIcon,
   AdminTypo,
+  LeftContainer,
+  ToolBarBox,
 } from "./Header.styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -30,11 +32,13 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
 
   return (
     <AppBarWrapper>
-      <Toolbar className="p-0">
-        <IconButton edge="start" onClick={toggleDrawer}>
-          <MenuIcon/>
-        </IconButton>
-        <SubTileText>DASHBOARD</SubTileText>
+      <ToolBarBox className="p-0">
+        <LeftContainer>
+          <IconButton edge="start" onClick={toggleDrawer}>
+            <MenuIcon />
+          </IconButton>
+          <SubTileText>DASHBOARD</SubTileText>
+        </LeftContainer>
         <RightContainer>
           <IconButton>
             <StyledSmallIcon>
@@ -47,20 +51,19 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
             </StyledSmallIcon>
           </IconButton>
           <div
-            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
-            onClick={handleMenuClick}
-          >
-            <KeyboardArrowDownIcon sx={{ color: "rgba(0, 0, 0, 0.5)", marginRight: "5px" }} />
-            <AdminTypo
-              variant="body1"
+              style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+              onClick={handleMenuClick}
             >
-              Administrator
-            </AdminTypo>
-            <IconButton>
-              <StyledLargeIcon />
-            </IconButton>
-          </div>
-
+              <KeyboardArrowDownIcon sx={{ color: "rgba(0, 0, 0, 0.5)", marginRight: "5px" }} />
+              <AdminTypo
+                variant="body1"
+              >
+                Administrator
+              </AdminTypo>
+              <IconButton>
+                <StyledLargeIcon />
+              </IconButton>
+            </div>
           <Menu
             anchorEl={anchorEl}
             open={open}
@@ -76,21 +79,21 @@ const Header = ({ toggleDrawer }: HeaderProps) => {
             PaperProps={{
               style: {
                 marginTop: "-5px",
-                height:"110px",
-                width:"180px",
-                border:"1px solid rgba(0, 0, 0, 0.15)"
+                height: "110px",
+                width: "180px",
+                border: "1px solid rgba(0, 0, 0, 0.15)"
               },
             }}
           >
-            <MenuItem onClick={handleClose} style={{fontSize:"20px",borderBottom:"1px solid rgba(0, 0, 0, 0.15)"}}>
-              <FaUser style={{ marginRight: "8px",fontSize:"20px" }} /> Profile
+            <MenuItem onClick={handleClose} style={{ fontSize: "20px", borderBottom: "1px solid rgba(0, 0, 0, 0.15)" }}>
+              <FaUser style={{ marginRight: "8px", fontSize: "20px" }} /> Profile
             </MenuItem>
-            <MenuItem onClick={handleClose} style={{fontSize:"20px"}}>
-              <FaEnvelope style={{ marginRight: "8px",fontSize:"20px" }} /> Logout
+            <MenuItem onClick={handleClose} style={{ fontSize: "20px" }}>
+              <FaEnvelope style={{ marginRight: "8px", fontSize: "20px" }} /> Logout
             </MenuItem>
           </Menu>
         </RightContainer>
-      </Toolbar>
+      </ToolBarBox>
     </AppBarWrapper>
   );
 };

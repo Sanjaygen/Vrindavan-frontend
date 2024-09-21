@@ -73,10 +73,7 @@ export const ContentDiv = styled("div")`
     width: 195px;
   }
   ${breakpoints.lg}{
-    width:304px;
-  }
-  ${breakpoints.xl}{
-    width:271px;
+    width: 270px;
   }
 `;
 export const DashButton = styled(Link) <DashButtonProps>`

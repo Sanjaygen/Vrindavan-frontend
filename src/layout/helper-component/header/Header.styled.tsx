@@ -7,51 +7,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 export const AppBarWrapper = styled(Box)`
   box-shadow: none;
   height: 65px;
-  padding: 4px 20px;
   .MuiToolbar-root {
     padding: 0px;
   }
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-bottom: 1px solid #ccc;
-
-  ${breakpoints.xs} {
-    left: 0%;
-    width: 100%;
-  }
-  ${breakpoints.md} {
-    left: 0%;
-    width: 100%;
-  }
-  ${breakpoints.lg} {
-    right:0px;
-    left: 18%;
-    width: 100%;
-  }
-  @media print {
-    display: none;
-  }
 `;
 
-export const IconMenu = styled(MenuIcon)`
-    margin-left:15px;
-    ${breakpoints.xs}{
-       margin-left:0px;
-    }
-    ${breakpoints.lg}{
-      margin-left:15px;
-   }
+export const ToolBarBox = styled("div")`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `
-
 
 export const SubTileText = styled(Typography)`
   font-family:Poppines,sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  font-display: swap; 
   color: rgba(0, 0, 0, 0.5);
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
   padding-left:20px;
   ${breakpoints.xs}{
     display:none;
@@ -61,32 +34,20 @@ export const SubTileText = styled(Typography)`
   }
 `;
 
+export const LeftContainer = styled(Box)`
+   padding-left: 30px;
+   display: flex;
+   align-items: center;
+`
+
 export const RightContainer = styled(Box)`
-  display: flex;
-  align-items: center;
-  margin-left: 500px;
-  gap: 16px;
-  overflow: hidden;
-  ${breakpoints.xs} {
-    margin-left: 40px;
-  }
-  ${breakpoints.sm} {
-    margin-left: 290px;
-  }
-  ${breakpoints.md} {
-    margin-left: auto;
-  }
-  ${breakpoints.lg} {
-    margin-left: 770px;
-  }
-  ${breakpoints.xl}{
-    margin-left: 660px;
-  }
+   padding-right: 20px;
+   display: flex;
 `;
 
 export const StyledSmallIcon = styled.span`
   font-size: 20px;
-  margin-left:10px;
+  margin-right:30px;
   color: rgba(0, 0, 0, 0.5);
   ${breakpoints.xs} {
     font-size: 15px;

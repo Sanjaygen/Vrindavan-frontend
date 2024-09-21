@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  AiFillDashboard,
-  AiOutlineUnorderedList,
-} from "react-icons/ai";
+import { AiFillDashboard, AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineAdd } from "react-icons/md";
 import CustomTables from "@/ui-components/CustomTables/CustomTables";
 import TabsComponent from "@/ui-components/tabs/Tabs";
@@ -25,7 +22,9 @@ import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeletePro
 import { ProductsColumns } from "@/config/Tables.config";
 
 const Header: React.FC = () => (
-  <HeaderTitle>Products | <span> Products Management</span></HeaderTitle>
+  <HeaderTitle>
+    Products | <span> Products Management</span>
+  </HeaderTitle>
 );
 
 const Breadcrumbs: React.FC = () => (
@@ -59,7 +58,7 @@ const ProductTabs: React.FC = () => {
       router.push("/inventory/products");
     }
   };
-  console.log('products', products)
+  console.log("products", products);
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
@@ -71,7 +70,6 @@ const ProductTabs: React.FC = () => {
     setOpenDialog(true);
   };
 
-
   const tabsData = [
     {
       id: "productList",
@@ -81,27 +79,24 @@ const ProductTabs: React.FC = () => {
     { id: "create", label: "Create Product", icon: <MdOutlineAdd /> },
   ];
 
-
-
   const formattedProducts =
-    Array.isArray(products)
-      ? products.map((product: any, index: number) => ({
-        sno: index + 1,
-        name: product.name || "N/A",
-        price: product.price || "N/A",
-        discountPrice: product.discount_price || "N/A",
-        image: product.image || "N/A",
-        totalProduct: product.package_items_count || 0,
-        stockUpdate: product.weight || "N/A",
-        weightage: product.weightage || "N/A",
-        id: product.id,
-        actions: (
-          <>
-            <button onClick={() => handleEditClick(product.id)}>Edit</button>
-            <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
-          </>
-        ),
-      })) : [];
+  products?.foods?.map((product: any, index: number) => ({
+      sno: index + 1,
+      name: product.name || "N/A",
+      price: product.price || "N/A",
+      discountPrice: product.discount_price || "N/A",
+      image: product.image || "N/A",
+      totalProduct: product.package_items_count || 0,
+      stockUpdate: product.weight || "N/A",
+      weightage: product.weightage || "N/A",
+      id: product.id,
+      actions: (
+        <>
+          <button onClick={() => handleEditClick(product.id)}>Edit</button>
+          <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
+        </>
+      ),
+    })) || [];
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
@@ -128,7 +123,6 @@ const ProductTabs: React.FC = () => {
       {activeTab === "create" && <CreateProductPage />}
 
       {activeTab === "edit" && productId && <EditProductPage />}
-
 
       <DeleteConfirmationDialog
         open={openDialog}

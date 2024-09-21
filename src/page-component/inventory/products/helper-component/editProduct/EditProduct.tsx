@@ -1,10 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  AiFillDashboard,
-  AiOutlinePlus,
-  AiOutlineUnorderedList,
-} from "react-icons/ai";
+import { AiFillDashboard, AiOutlinePlus, AiOutlineUnorderedList } from "react-icons/ai";
 import { FaPencilAlt, FaUndo } from "react-icons/fa";
 import { IoIosSave } from "react-icons/io";
 import { MdCloudUpload } from "react-icons/md";
@@ -45,12 +41,7 @@ interface EditProductProps {
   productId: number;
 }
 
-interface EditBoxProps {
-  product: ProductProps | null;
-  onSave: (data: { id: string; payload: ProductProps }) => void; 
-}
-
-const EditBox: React.FC<EditBoxProps> = ({ product, onSave }) => {
+const EditBox: React.FC<{ product: ProductProps | null; onSave: (data: { id: number; payload: ProductProps }) => void }> = ({ product, onSave }) => {
   const { control, handleSubmit, setValue, watch, reset } = useForm({
     defaultValues: {
       name: product?.name || "",
@@ -60,7 +51,7 @@ const EditBox: React.FC<EditBoxProps> = ({ product, onSave }) => {
     },
   });
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const image = watch("image");
 
   useEffect(() => {
@@ -100,9 +91,9 @@ const EditBox: React.FC<EditBoxProps> = ({ product, onSave }) => {
     if (product) {
       const payload = {
         ...data,
-        price: product.price,
-        categoryId: product.categoryId,
-        id: product.id,
+        id: product.id, // Make sure to include the product id
+        price: product.price, // Include any other necessary fields
+        categoryId: product.category_id,
       };
 
       onSave({
@@ -196,10 +187,7 @@ const EditBox: React.FC<EditBoxProps> = ({ product, onSave }) => {
                       height={200}
                     />
                   </ImagePreview>
-                  <RemoveLink
-                    onClick={onRemoveImage}
-                    href="#"
-                  >
+                  <RemoveLink onClick={onRemoveImage} href="#">
                     Remove file
                   </RemoveLink>
                 </div>
@@ -250,12 +238,9 @@ const Breadcrumbs: React.FC = () => (
   </BreadcrumbContainer>
 );
 
-interface TabsContainerProps {
-  product: ProductProps | null;
-}
-
-const TabsContainer: React.FC<TabsContainerProps> = ({ product }) => {
+const TabsContainer: React.FC<{ product: ProductProps | null }> = ({ product }) => {
   const router = useRouter();
+  const { mutate: updateProduct } = useUpdateProduct();
 
   const handleTabChange = (newTab: string) => {
     if (newTab === "productsList") {
@@ -280,7 +265,7 @@ const TabsContainer: React.FC<TabsContainerProps> = ({ product }) => {
           { id: "edit", label: "Edit Product", icon: <FaPencilAlt /> },
         ]}
       />
-      <EditBox product={product} onSave={useUpdateProduct().mutate} />
+      <EditBox product={product} onSave={({ id, payload }) => updateProduct({ id, payload })} />
     </ContentWrapper>
   );
 };
@@ -291,8 +276,8 @@ const EditProductComponent: React.FC<EditProductProps> = ({ productId }) => {
   const [product, setProduct] = useState<ProductProps | null>(null);
 
   useEffect(() => {
-    if (data && Array.isArray(data) && data.length > 0) {
-      setProduct(data[0]);
+    if (data && !Array.isArray(data)) {
+      setProduct(data);
     }
   }, [data]);
 
@@ -302,7 +287,7 @@ const EditProductComponent: React.FC<EditProductProps> = ({ productId }) => {
   return (
     <CreateProductWrapper>
       <HeaderWrapper>
-      <HeaderTitle>Products | Products Management</HeaderTitle>
+        <HeaderTitle>Products | Products Management</HeaderTitle>
         <Breadcrumbs />
       </HeaderWrapper>
       <ContentWrapper>

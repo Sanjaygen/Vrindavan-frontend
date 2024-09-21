@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  AiFillDashboard,
-  AiOutlineUnorderedList,
-} from "react-icons/ai"; 
+import { AiFillDashboard, AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineAdd } from "react-icons/md";
 import CustomTables from "@/ui-components/CustomTables/CustomTables";
 import TabsComponent from "@/ui-components/tabs/Tabs";
@@ -25,7 +22,9 @@ import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeletePro
 import { ProductsColumns } from "@/config/Tables.config";
 
 const Header: React.FC = () => (
-  <HeaderTitle>Products | <span> Products Management</span></HeaderTitle>
+  <HeaderTitle>
+    Products | <span> Products Management</span>
+  </HeaderTitle>
 );
 
 const Breadcrumbs: React.FC = () => (
@@ -59,7 +58,7 @@ const ProductTabs: React.FC = () => {
       router.push("/inventory/products");
     }
   };
-console.log('products',products)
+  console.log("products", products);
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
@@ -71,7 +70,6 @@ console.log('products',products)
     setOpenDialog(true);
   };
 
-
   const tabsData = [
     {
       id: "productList",
@@ -81,10 +79,8 @@ console.log('products',products)
     { id: "create", label: "Create Product", icon: <MdOutlineAdd /> },
   ];
 
-
-
   const formattedProducts =
-    products?.map((product: any, index: number) => ({
+  products?.foods?.map((product: any, index: number) => ({
       sno: index + 1,
       name: product.name || "N/A",
       price: product.price || "N/A",
@@ -127,7 +123,6 @@ console.log('products',products)
       {activeTab === "create" && <CreateProductPage />}
 
       {activeTab === "edit" && productId && <EditProductPage />}
-
 
       <DeleteConfirmationDialog
         open={openDialog}

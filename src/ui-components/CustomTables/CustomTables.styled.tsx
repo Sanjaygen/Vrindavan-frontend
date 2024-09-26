@@ -1,5 +1,5 @@
 import breakpoints from "@/themes/breakpoints";
-import { Paper, Table, TableContainer } from "@mui/material";
+import { Paper, Table} from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import { styled } from "styled-components";
 
@@ -43,7 +43,7 @@ export const LeftControls = styled('div')`
 export const RightControls = styled('div')`
   display: flex;
   align-items: center;
-  margin-right: 23px;
+  margin-right: 5px;
 `;
 export const PaginationContainer = styled('div')`
   display: flex;
@@ -112,38 +112,43 @@ export const SearchContainer = styled('div')`
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 300px;
+  width: 250px; 
+  height: 32px; 
   ${breakpoints.sm}{
-     width: 200px;
+     width: 180px;
+     height: 28px; 
   }
   ${breakpoints.md}{
-    width: 300px;
- }
+    width: 250px;
+    height: 32px;
+  }
 `;
 
 export const SearchInput = styled('input')`
-  width: 100%; 
+  width: 100%;
   border: none;
   outline: none;
-  padding: 8px 30px 8px 8px;
-  font-size: 14px;
+  padding: 6px 26px 6px 6px; 
+  font-size: 12px; 
   border-radius: 4px;
+  height: 100%; 
   ${breakpoints.sm}{
-    font-size: 12px;
+    font-size: 10px; 
   }
   ${breakpoints.md}{
-    font-size: 14px;
+    font-size: 12px;
   }
 `;
 
 export const IconDiv = styled("div")`
    background-color: #e9ecef;
-   padding: 10px;
+   padding: 6px;
    border-left: 1px solid #ccc;
-`
+   height: 100%; 
+`;
 
 export const SearchIcon = styled(FaSearch)`
-  font-size: 18px;
+  font-size: 14px; 
   color: #888;
   cursor: pointer;
 `;

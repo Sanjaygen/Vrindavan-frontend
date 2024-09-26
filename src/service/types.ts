@@ -1,8 +1,12 @@
 export interface ProductProps {
-  id?: string;
+  id: string | number;
   name: string;
   description: string;
   weightage: string;
   image: string | null;
-  [key: string]: any; // Index signature to allow additional properties
+  [key: string]: unknown; 
+}
+export interface ProductListProps extends ProductProps {
+  sno: number; 
+  actions: React.JSX.Element; 
 }

@@ -12,13 +12,12 @@ interface SubMenuButtonProps {
 }
 
 export const Sidebar = styled.div`
-  width: 270px;
   height: 100vh;
-  ${breakpoints.md}{
+  ${breakpoints.lg}{
     width: 195px;
   }
-  ${breakpoints.lg}{
-    width: 270px;
+  ${breakpoints.xl}{
+    width: 250px;
   }
 `;
 
@@ -71,11 +70,11 @@ export const MenuButton = styled.button<MenuButtonProps>`
       font-size: 18px;
     }
   }
-  ${breakpoints.md}{
-    width: 195px;
-  }
   ${breakpoints.lg}{
-    width: 270px;
+    width:250px;
+  }
+  ${breakpoints.xl}{
+    width: 269px;
     .menu-label{
       font-size: 16px;
     }
@@ -116,17 +115,18 @@ export const SubMenuButton = styled(Link) <SubMenuButtonProps>`
       width: 270px;
     }
   }
-  ${breakpoints.md}{
+  ${breakpoints.lg}{
     &:hover{
-      width: 195px;
+      width: 250px;
     }
   }
-  ${breakpoints.lg}{
+  ${breakpoints.xl}{
     font-size: 13px;
     &:hover{
-      width: 270px;
+      width: 269px;
     }
   }
+    
 `;
 
 export const SubMenu = styled.div<{ $isOpen: boolean }>`
@@ -138,11 +138,11 @@ export const SubMenu = styled.div<{ $isOpen: boolean }>`
   ${breakpoints.xs}{
     width: 270px;
   }
-  ${breakpoints.md}{
-    width: 195px;
-  }
   ${breakpoints.lg}{
-    width: 270px;
+    width: 250px;
+  }
+  ${breakpoints.xl}{
+   width: 269px;
   }
 `;
 
@@ -157,7 +157,7 @@ export const AppTitle = styled("p")`
   ${breakpoints.xs}{
     font-size:15px;
   }
-  ${breakpoints.lg}{
+  ${breakpoints.xl}{
     font-size:20px;
   }
 `;

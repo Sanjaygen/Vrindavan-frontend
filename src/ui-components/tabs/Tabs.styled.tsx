@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 
 export const MainTab = styled.div`
   display: flex;
+   margin-right: 10px;
+  margin-left: 10px;
   ${breakpoints.xs}{
     flex-direction: column;
   }
@@ -13,7 +15,7 @@ export const MainTab = styled.div`
 export const TabList = styled.div`
   display: flex;
   border-bottom: 1px solid #ccc;
-  margin-left:20px;
+  // margin-left:20px;
   width: 50%;
   ${breakpoints.xs}{
     width: 90%;

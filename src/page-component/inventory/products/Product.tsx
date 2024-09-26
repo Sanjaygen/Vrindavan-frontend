@@ -1,54 +1,21 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AiFillDashboard, AiOutlineUnorderedList } from "react-icons/ai";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 import { MdOutlineAdd } from "react-icons/md";
-import CustomTables from "@/ui-components/CustomTables/CustomTables";
-import TabsComponent from "@/ui-components/tabs/Tabs";
-import {
-  BreadcrumbContainer,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Container,
-  ContentWrapper,
-  HeaderTitle,
-  HeaderWrapper,
-  IconWrapper,
-} from "./Product.styled";
-import { useProducts } from "@/hooks/useProducts";
-import EditProductPage from "@/app/inventory/products/edit/[productId]/page";
-import { Column } from "@/types/inventory";
 import CreateProductPage from "@/app/inventory/products/create/page";
+import EditProductPage from "@/app/inventory/products/edit/[productId]/page";
+import ProductList from "./helper-component/productList/ProductList";
 import DeleteConfirmationDialog from "./helper-component/deleteProduct/DeleteProduct";
-import { ProductsColumns } from "@/config/Tables.config";
-
-const Header: React.FC = () => (
-  <HeaderTitle>
-    Products | <span> Products Management</span>
-  </HeaderTitle>
-);
-
-const Breadcrumbs: React.FC = () => (
-  <BreadcrumbContainer>
-    <BreadcrumbItem>
-      <IconWrapper>
-        <AiFillDashboard />
-      </IconWrapper>
-      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>Products List</BreadcrumbItem>
-  </BreadcrumbContainer>
-);
+import TabsComponent from "@/ui-components/tabs/Tabs";
+import { Container, ContentWrapper, HeaderWrapper } from "./Product.styled";
+import HeaderContent from "@/ui-components/headContent/HeadContent";
+import CustomBreadcrumbs from "@/ui-components/breadcrumbs/BreadCrumbs";
 
 const ProductTabs: React.FC = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("productList");
   const [productId, setProductId] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-
-  const { data: products, isLoading, error } = useProducts() as any;
 
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
@@ -58,15 +25,16 @@ const ProductTabs: React.FC = () => {
       router.push("/inventory/products");
     }
   };
-  console.log("products", products);
+
   const handleEditClick = (id: string | number) => {
     const productIdNumber = typeof id === "string" ? Number(id) : id;
     setActiveTab("edit");
+    setProductId(String(productIdNumber));
     router.push(`/inventory/products/edit/${productIdNumber}`);
   };
 
   const handleDeleteClick = (id: string | number) => {
-    setProductId(typeof id === "string" ? id : String(id));
+    setProductId(String(id));
     setOpenDialog(true);
   };
 
@@ -79,28 +47,6 @@ const ProductTabs: React.FC = () => {
     { id: "create", label: "Create Product", icon: <MdOutlineAdd /> },
   ];
 
-  const formattedProducts =
-  products?.foods?.map((product: any, index: number) => ({
-      sno: index + 1,
-      name: product.name || "N/A",
-      price: product.price || "N/A",
-      discountPrice: product.discount_price || "N/A",
-      image: product.image || "N/A",
-      totalProduct: product.package_items_count || 0,
-      stockUpdate: product.weight || "N/A",
-      weightage: product.weightage || "N/A",
-      id: product.id,
-      actions: (
-        <>
-          <button onClick={() => handleEditClick(product.id)}>Edit</button>
-          <button onClick={() => handleDeleteClick(product.id)}>Delete</button>
-        </>
-      ),
-    })) || [];
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading products</div>;
-
   return (
     <ContentWrapper>
       <TabsComponent
@@ -110,14 +56,10 @@ const ProductTabs: React.FC = () => {
       />
 
       {activeTab === "productList" && (
-        <>
-          <CustomTables
-            columns={ProductsColumns}
-            rows={formattedProducts}
-            onEditClick={handleEditClick}
-            onDeleteClick={handleDeleteClick}
-          />
-        </>
+        <ProductList
+          onEditClick={handleEditClick}
+          onDeleteClick={handleDeleteClick}
+        />
       )}
 
       {activeTab === "create" && <CreateProductPage />}
@@ -132,15 +74,22 @@ const ProductTabs: React.FC = () => {
     </ContentWrapper>
   );
 };
-
 const ProductComponent: React.FC = () => (
+  
   <Container>
     <HeaderWrapper>
-      <Header />
-      <Breadcrumbs />
+    <HeaderContent title="Products" subtitle="Products Management" />
+      <CustomBreadcrumbs
+        links={[
+          { label: "Dashboard", href: "/dashboard" },
+          { label: "Products", href: "/inventory/products" },
+          { label: "Products List" },
+        ]}
+      />
     </HeaderWrapper>
     <ProductTabs />
   </Container>
 );
 
 export default ProductComponent;
+

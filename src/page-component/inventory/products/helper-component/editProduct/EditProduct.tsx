@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AiFillDashboard, AiOutlinePlus, AiOutlineUnorderedList } from "react-icons/ai";
+import {
+  AiOutlinePlus,
+  AiOutlineUnorderedList,
+} from "react-icons/ai";
 import { FaPencilAlt, FaUndo } from "react-icons/fa";
 import { IoIosSave } from "react-icons/io";
 import { MdCloudUpload } from "react-icons/md";
@@ -27,29 +30,30 @@ import {
   UploadText,
   CreateProductWrapper,
   HeaderWrapper,
-  HeaderTitle,
-  BreadcrumbContainer,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  IconWrapper,
   ContentWrapper,
 } from "./EditProduct.styled";
 import { useProductById, useUpdateProduct } from "@/hooks/useProducts";
 import { ProductProps } from "@/service/types";
+import HeaderContent from "@/ui-components/headContent/HeadContent";
+import CustomBreadcrumbs from "@/ui-components/breadcrumbs/BreadCrumbs";
 
 interface EditProductProps {
   productId: number;
 }
 
-const EditBox: React.FC<{ product: ProductProps | null; onSave: (data: { id: number; payload: ProductProps }) => void }> = ({ product, onSave }) => {
-  const { control, handleSubmit, setValue, watch, reset } = useForm({
-    defaultValues: {
-      name: product?.name || "",
-      description: product?.description || "",
-      weightage: product?.weightage || "",
-      image: product?.image || null,
-    },
-  });
+const EditBox: React.FC<{
+  product: ProductProps | null;
+  onSave: (data: { id: number; payload: ProductProps }) => void;
+}> = ({ product, onSave }) => {
+  const { control, handleSubmit, setValue, watch, reset } =
+    useForm<ProductProps>({
+      defaultValues: {
+        name: product?.name || "",
+        description: product?.description || "",
+        weightage: product?.weightage || "",
+        image: product?.image || null,
+      },
+    });
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const image = watch("image");
@@ -87,17 +91,16 @@ const EditBox: React.FC<{ product: ProductProps | null; onSave: (data: { id: num
     setValue("image", null);
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ProductProps) => {
     if (product) {
       const payload = {
         ...data,
-        id: product.id, // Make sure to include the product id
-        price: product.price, // Include any other necessary fields
+        price: product.price,
         categoryId: product.category_id,
       };
 
       onSave({
-        id: product.id,
+        id: product.id as number,
         payload,
       });
     }
@@ -223,22 +226,9 @@ const EditBox: React.FC<{ product: ProductProps | null; onSave: (data: { id: num
   );
 };
 
-const Breadcrumbs: React.FC = () => (
-  <BreadcrumbContainer>
-    <BreadcrumbItem>
-      <IconWrapper>
-        <AiFillDashboard />
-      </IconWrapper>
-      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/inventory/products">Products</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>Edit Product</BreadcrumbItem>
-  </BreadcrumbContainer>
-);
-
-const TabsContainer: React.FC<{ product: ProductProps | null }> = ({ product }) => {
+const TabsContainer: React.FC<{ product: ProductProps | null }> = ({
+  product,
+}) => {
   const router = useRouter();
   const { mutate: updateProduct } = useUpdateProduct();
 
@@ -265,7 +255,10 @@ const TabsContainer: React.FC<{ product: ProductProps | null }> = ({ product }) 
           { id: "edit", label: "Edit Product", icon: <FaPencilAlt /> },
         ]}
       />
-      <EditBox product={product} onSave={({ id, payload }) => updateProduct({ id, payload })} />
+      <EditBox
+        product={product}
+        onSave={({ id, payload }) => updateProduct({ id, payload })}
+      />
     </ContentWrapper>
   );
 };
@@ -286,10 +279,16 @@ const EditProductComponent: React.FC<EditProductProps> = ({ productId }) => {
 
   return (
     <CreateProductWrapper>
-      <HeaderWrapper>
-        <HeaderTitle>Products | Products Management</HeaderTitle>
-        <Breadcrumbs />
-      </HeaderWrapper>
+       <HeaderWrapper>
+    <HeaderContent title="Products" subtitle="Products Management" />
+      <CustomBreadcrumbs
+        links={[
+          { label: "Dashboard", href: "/dashboard" },
+          { label: "Products", href: "/inventory/products" },
+          { label: "Products List" },
+        ]}
+      />
+    </HeaderWrapper>
       <ContentWrapper>
         {product && <TabsContainer product={product} />}
       </ContentWrapper>

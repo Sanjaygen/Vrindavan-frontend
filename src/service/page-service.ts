@@ -2,7 +2,7 @@ import { get, post, update, del } from "./api-service/api";
 import { ProductProps } from "./types";
 
 interface FetchProductsResponse {
-  data: ProductProps[];
+  foods: ProductProps[];
   total: number;
 }
 
@@ -21,13 +21,13 @@ export const createProduct = async (payload: ProductProps): Promise<ProductProps
   return response.data;
 };
 
-export const updateProduct = async (
-  id: string,
-  payload: ProductProps
-): Promise<ProductProps> => {
-  const response = await update<{ data: ProductProps }>(`foods/${id}`, payload);
-  return response.data;
-};
+  export const updateProduct = async (
+    id: string,
+    payload: ProductProps
+  ): Promise<ProductProps> => {
+    const response = await update<{ data: ProductProps }>(`foods/${id}`, payload);
+    return response.data;
+  };
 
 export const deleteProduct = async (id: string): Promise<void> => {
   await del(`foods/${id}`);

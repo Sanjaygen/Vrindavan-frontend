@@ -1,57 +1,14 @@
+import breakpoints from '@/themes/breakpoints';
 import { Button as MuiButton, ButtonProps} from '@mui/material';
 import Link from 'next/link';
 import styled from "styled-components";
-
-
-export const Button = styled(MuiButton)<ButtonProps>`
-background-color: #007bff;
-color: white;
-border: none;
-padding: 0.5rem 1rem;
-border-radius: 4px;
-cursor: pointer;
-font-size: 1rem;
-display: flex;
-align-items: center;
-gap: 0.5rem;
-
-&:hover {
-  background-color: #0056b3;
-}
-`;
-
-export const SecondaryButton = styled(Button)`
-background-color: #6c757d;
-
-&:hover {
-  background-color: #5a6268;
-}
-`;
-
-
-export const QuillWrapper = styled.div`
-  .ql-container {
-    border: 1px solid #ccc;
-    font-size: 16px;
-    resize: vertical;
-    min-height: 220px;
-    max-height: 500px;
-    overflow-y: auto;
-  }
-  .ql-editor {
-    padding: 10px;
-    min-height: 120px;
-  }
-  .ql-toolbar {
-    border-bottom: 1px solid #ccc;
-  }
-`;
 
 
 export const CreateProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
 `;
 
 export const HeaderWrapper = styled.div`
@@ -59,45 +16,12 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-`;
-
-export const HeaderTitle = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-`;
-
-export const BreadcrumbContainer = styled.nav`
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-`;
-
-export const BreadcrumbItem = styled.span`
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
-
-  &:not(:last-child)::after {
-    content: "/";
-    margin-left: 8px;
-    color: #999;
+  ${breakpoints.xs}{
+    flex-direction: column;
   }
-`;
-
-export const BreadcrumbLink = styled(Link)`
-  text-decoration: none;
-  color: #007bff;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:hover {
-    color: #0056b3;
+  ${breakpoints.sm}{
+    flex-direction: row;
   }
-`;
-
-export const IconWrapper = styled.span`
-  margin-right: 4px;
-  color: #007bff;
 `;
 
 export const ContentWrapper = styled.div`
@@ -106,78 +30,102 @@ export const ContentWrapper = styled.div`
   margin-top: 20px;
 `;
 
-export const FormContainer = styled.div`
+export const LeftColumn = styled.div`
+  flex: 0.48; 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; 
 `;
 
-export const FormColumn = styled.div`
+export const RightColumn = styled.div`
+  flex: 0.48; 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; 
 `;
 
-export const FormRow = styled.div`
+export const ProductFormContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px; 
+  justify-content: space-between; 
+  margin-bottom: 20px;
+  max-width: 1200px; 
+  width: 100%; 
+`;
+
+
+export const ProductFormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  margin-bottom: 8px; 
 `;
 
-export const Label = styled.label`
+export const ProductLabel = styled.label`
+  display: block;
   font-weight: bold;
+  margin-bottom: 5px;
 `;
 
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-export const HelperText = styled.span`
-  font-size: 12px;
+export const ProductHelperText = styled.small`
   color: #666;
+  margin-top: 4px;
 `;
 
-export const UploadArea = styled.div<{ hasImage: boolean }>`
+export const ImageDiv = styled.div`
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  justify-content:center;
+`;
+
+export const ProductUploadArea = styled.div<{ hasImage: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  border: 2px dashed #007bff;
-  border-radius: 8px;
-  background-color: ${props => (props.hasImage ? "#f8f9fa" : "#fff")};
+  padding: 10px;
+  background-color: ${(props) => (props.hasImage ? "#f9f9f9" : "#fff")};
+  border: 1px dashed #ccc;
+  border-radius: 4px;
   cursor: pointer;
+  height: 150px;
+  
 `;
 
-export const UploadIcon = styled.div`
-  font-size: 24px;
-  color: #007bff;
+export const ProductUploadIcon = styled.div`
+  font-size: 38px;
+  color: #888;
+
 `;
 
-export const UploadText = styled.span`
-  margin-left: 8px;
+export const ProductUploadText = styled.div`
+  font-size: 14px;
+  color: #888
 `;
 
-export const ImagePreview = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const RemoveLink = styled.a`
-  display: inline-block;
-  margin-top: 8px;
-  color: #007bff;
-  cursor: pointer;
-
-  &:hover {
-    color: #0056b3;
+export const ProductImagePreview = styled.div`
+  img {
+    max-width: 100%;
+    max-height: 100px;
+    display: block;
   }
+`;
+
+export const ProductRemoveLink = styled.a`
+  font-size: 12px;
+  color: red;
+  cursor: pointer;
+`;
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+
+`;
+
+export const CheckboxItem = styled.div`
+  
 `;
 
 export const StyledButton = styled.button<{ variant: "outlined" | "contained" }>`
@@ -195,6 +143,9 @@ export const StyledButton = styled.button<{ variant: "outlined" | "contained" }>
 `;
 
 export const StyledHr = styled.hr`
+  border: none;
+  height: 1px;
+  background-color: #ccc;
   margin: 20px 0;
 `;
 

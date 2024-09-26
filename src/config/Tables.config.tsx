@@ -13,6 +13,7 @@ export const ProductsColumns: Column[] = [
   { id: "discountPrice", label: "Discount Price", accessor: "discountPrice" },
   { id: "totalProduct", label: "Total Product", accessor: "totalProduct" },
   { id: "stockUpdate", label: "Stock Update", accessor: "stockUpdate" },
+  { id: "unitSize", label: "Unit Size", accessor: "unitSize" },
   { id: "weightage", label: "Weightage", accessor: "weightage" },
   { id: "actions", label: "Actions", accessor: "actions" },
 ];

@@ -1,6 +1,4 @@
 import React from "react";
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -9,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { HeaderContainer, IconDiv, LeftControls, PageButton, PaginationButtons, PaginationContainer, PaginationInfo, PaperContnent, RightControls, SearchContainer, SearchIcon, SearchInput, TableContent } from './CustomTables.styled';
-import { DashboardTableProps, Column } from '@/types/inventory';
+import { DashboardTableProps } from '@/types/inventory';
 
 const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClick, onDeleteClick }) => {
   const [page, setPage] = React.useState(0);
@@ -45,8 +43,8 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
 
   const filteredRows = rows.filter((row) =>
     columns.some((column) =>
-      (row[column.accessor] as string)
-        .toString()
+      row[column.accessor]
+        ?.toString()
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
     )
@@ -135,28 +133,6 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
                   ))}
                 </TableRow>
               ))}
-            {filteredRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-              <TableRow key={index}>
-                {columns.map((column) => (
-                  <TableCell key={column.id} align="left">
-                    {column.accessor === 'actions' ? (
-                      <div>
-                        <FaRegEdit
-                          onClick={() => onEditClick(row.id)}
-                          style={{ cursor: 'pointer', marginRight: '10px' }}
-                        />
-                        <FaRegTrashAlt
-                          onClick={() => onDeleteClick(row.id)}
-                          style={{ cursor: 'pointer' }}
-                        />
-                      </div>
-                    ) : (
-                      row[column.accessor]
-                    )}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
           </TableBody>
         </TableContent>
       </TableContainer>

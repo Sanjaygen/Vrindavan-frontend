@@ -1,13 +1,33 @@
-import React, { useRef, useEffect } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { QuillWrapper } from "./CreateProduct.styled";
+import React, { useState, useRef, useEffect } from "react";
+import ReactQuill from "react-quill"; 
+import "react-quill/dist/quill.snow.css"; 
+import styled from "styled-components"; 
 
-
+const QuillWrapper = styled.div`
+  .ql-container {
+    border: 1px solid #ccc; 
+    font-size: 16px;
+    resize: vertical; 
+    width: 83%;
+    min-height: 220px; 
+    max-height: 500px; 
+    overflow-y: auto; 
+    margin-left:10px;
+  }
+  .ql-editor {
+    padding: 10px; 
+    min-height: 120px; 
+  }
+  .ql-toolbar {
+    border-bottom: 1px solid #ccc; 
+    width: 83%;
+    margin-left:10px;
+  }
+`;
 
 interface NoteToolbarProps {
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 const NoteToolbar: React.FC<NoteToolbarProps> = ({ value, onChange }) => {
@@ -18,10 +38,7 @@ const NoteToolbar: React.FC<NoteToolbarProps> = ({ value, onChange }) => {
       const editor = quillRef.current.getEditor();
       const editorElement = editor.root;
 
-      editorElement.style.height = `${Math.min(
-        editorElement.scrollHeight,
-        300
-      )}px`;
+      editorElement.style.height = `${Math.min(editorElement.scrollHeight, 300)}px`;
     }
   }, [value]);
 

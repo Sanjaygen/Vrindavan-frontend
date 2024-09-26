@@ -135,7 +135,10 @@ const ButtonGroup = ({
         onClose={onExportClose}
       >
         <MenuList>
-          <MenuItem>CSV</MenuItem>
+          <MenuItem
+            onClick={onExportClose}
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >CSV</MenuItem>
           <MenuItem>Excel</MenuItem>
           <MenuItem>PDF</MenuItem>
         </MenuList>

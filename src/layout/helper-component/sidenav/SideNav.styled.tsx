@@ -1,4 +1,3 @@
-
 import breakpoints from "@/themes/breakpoints";
 import Link from "next/link";
 import { AiFillDashboard } from "react-icons/ai";
@@ -34,50 +33,55 @@ export const SideMenuWrapper = styled("div")`
     width: 100%;
   }
 `;
-export const SubHead = styled('div')`
-  font-family:Poppins;
+export const SubHead = styled("div")`
+  font-family: Poppins;
   font-weight: 300 !important;
   font-size: 20px;
   color: black;
   left: 20px;
   position: relative;
   display: flex;
-  ${breakpoints.xs}{
-      font-size:15px;
+  ${breakpoints.xs} {
+    font-size: 15px;
   }
-  ${breakpoints.lg}{
-    font-size:20px;
+  ${breakpoints.xl} {
+    font-size: 20px;
   }
 `;
 export const ContentDiv = styled("div")`
   position: fixed;
   top: 0;
-  height:65px;
-  width:304px;
+  height: 65px;
   background-color: #fff;
   z-index: 1000;
   border-bottom: 1px solid #ccc;
-  padding-top:10px;
+  padding-top: 10px;
   display: flex;
-  align-items:center;
+  align-items: center;
   img {
     height: 38px;
     width: 38px;
     margin-top: -4px;
     margin-right: 10px;
   }
-  ${breakpoints.xs}{
-    width:270px;
-  }
-  ${breakpoints.md}{
-    width: 195px;
-  }
-  ${breakpoints.lg}{
+  ${breakpoints.xs} {
     width: 270px;
   }
+  ${breakpoints.md} {
+    width: 269px;
+  }
+  ${breakpoints.lg} {
+    width: 249px;
+  }
+  ${breakpoints.xl} {
+    width: 269px;
+  }
+  ${breakpoints['2xl']} {
+    width: 269px;
+  }
 `;
-export const DashButton = styled(Link) <DashButtonProps>`
-  font-family:Poppins;
+export const DashButton = styled(Link)<DashButtonProps>`
+  font-family: Poppins;
   font-weight: 400 !important;
   font-size: 18px;
   display: flex;
@@ -89,7 +93,7 @@ export const DashButton = styled(Link) <DashButtonProps>`
   text-decoration: none;
   border-radius: 0px;
   background: none;
-  color: #343A40;
+  color: #343a40;
 
   &:hover {
     background-color: #e2e6ea;
@@ -103,17 +107,17 @@ export const DashButton = styled(Link) <DashButtonProps>`
   .dash-menu-icon {
     font-size: 22px;
     margin-right: 20px;
-    color: #343A40;
+    color: #343a40;
   }
 
-  ${breakpoints.xs}{
-    font-size:14px;
+  ${breakpoints.xs} {
+    font-size: 14px;
     .dash-menu-icon {
       font-size: 18px;
     }
   }
-  ${breakpoints.lg}{
-    font-size:18px;
+  ${breakpoints.lg} {
+    font-size: 18px;
     .dash-menu-icon {
       font-size: 22px;
     }
@@ -123,5 +127,5 @@ export const DashButton = styled(Link) <DashButtonProps>`
 export const DashIcon = styled(AiFillDashboard)`
   font-size: 22px;
   margin-left: 23px;
-  color: inherit; 
+  color: inherit;
 `;

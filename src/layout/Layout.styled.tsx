@@ -10,7 +10,6 @@ export const LayoutContainer = styled(Box)`
 export const SideNavWrapper = styled(Box)`
     position: fixed;
     top: 0;
-    width: 19%;
     align-items: flex-start;
     background-color: white;
     color: black;
@@ -23,18 +22,21 @@ export const SideNavWrapper = styled(Box)`
     ${breakpoints.xs} {
         display: none;
     }
-    ${breakpoints.md} {
+    ${breakpoints.lg} {
         display: block;
         height: 100%;
+        width: 24.4%;
     }
     ${breakpoints.xl}{
-        width: 17%;
+        width: 18.7%;
+    } 
+    ${breakpoints['2xl']} {
+    width: 17.8%;
     }
 `;
 
 export const PageWrapper = styled('div')`
     flex-basis: 82%;
-    margin-left: 20%;
     padding: 0px 0px 20px 0px;
     margin-top: 8%;
 
@@ -42,18 +44,18 @@ export const PageWrapper = styled('div')`
         margin-top: 0%;
         margin-left: 0%;
     }
-    ${breakpoints.sm} {
+    ${breakpoints.md} {
         margin-top: 0%;
         margin-left: 0%;
     }
 
-    ${breakpoints.md} {
-        margin-top: 0%;
-        margin-left: 19%;
-    }
     ${breakpoints.lg} {
         margin-top: 0%;
-        margin-left: 17%;
+         margin-left: 250px;
+    }
+    ${breakpoints.xl} {
+        margin-top: 0%;
+        margin-left: 271px;
     }
 `;
 
@@ -79,13 +81,13 @@ export const PageBox = styled('div')`
     margin-bottom: 3%;
 `;
 export const SideNavDrawer = styled(Box)`
-    ${breakpoints.md} {
+    ${breakpoints.lg} {
         background-color: primary;
         color: white;
         height: '100%'
     },
 
-   ${breakpoints.lg} {
+   ${breakpoints.xl} {
         background-color: primary;
         color: white;
         height: '100%'

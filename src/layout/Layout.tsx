@@ -24,9 +24,9 @@ const DashboardLayout = ({ children }: LayoutProps) => {
                 <Header toggleDrawer={toggleDrawer} />
                 {/* <BreadcrumbsPage /> */}
                 <PageBox>{children}</PageBox>
-                <FooterWrap>
+                {/* <FooterWrap>
                     <Footer bgColor={'white'} isFixed />
-                </FooterWrap>
+                </FooterWrap> */}
             </PageWrapper>
             <DrawerStyled
                 showDrawer={showDrawer}

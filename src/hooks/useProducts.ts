@@ -36,8 +36,8 @@ export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, payload }: { id: string; payload: ProductProps }) =>
-      updateProduct(id, payload),
+    mutationFn: ({ id, payload }: { id: number; payload: ProductProps }) =>
+      updateProduct(id.toString(), payload),
     onSuccess: () => {
       queryClient.invalidateQueries(["foods"]);
     },

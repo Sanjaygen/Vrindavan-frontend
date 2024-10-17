@@ -8,7 +8,16 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { HeaderContainer, IconDiv, LeftControls, PageButton, PaginationButtons, PaginationContainer, PaginationInfo, PaperContnent, RightControls, SearchContainer, SearchIcon, SearchInput, TableContent } from './CustomTables.styled';
 import { DashboardTableProps } from '@/types/inventory';
+import { styled } from "styled-components";
 
+const ActiveStatus = styled.span<{ active: boolean }>`
+  background-color: ${(props) => (props.active ? "green" : "red")};
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: lowercase;
+  font-size: 12px;
+`;
 const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClick, onDeleteClick }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -16,9 +25,9 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
 
   const totalPages = Math.ceil(rows.length / rowsPerPage);
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
+  // const handlePageChange = (newPage: number) => {
+  //   setPage(newPage);
+  // };
 
   const handlePreviousPage = () => {
     if (page > 0) {
@@ -96,7 +105,7 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  align="left"
+                  align={column.align || 'left'}
                   sx={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: { sm: "12px", md: "17px" },
@@ -114,22 +123,26 @@ const CustomTables: React.FC<DashboardTableProps> = ({ columns, rows, onEditClic
               .map((row, index) => (
                 <TableRow key={index}>
                   {columns.map((column) => (
-                    <TableCell key={column.id} align="left">
-                      {column.accessor === 'actions' ? (
-                        <div>
-                          <FaRegEdit
-                            onClick={() => onEditClick(row.id)}
-                            style={{ cursor: 'pointer', marginRight: '10px' }}
-                          />
-                          <FaRegTrashAlt
-                            onClick={() => onDeleteClick(row.id)}
-                            style={{ cursor: 'pointer' }}
-                          />
-                        </div>
-                      ) : (
-                        row[column.accessor]
-                      )}
-                    </TableCell>
+                   <TableCell key={column.id} align={column.align || "left"}>
+                   {column.accessor === "actions" ? (
+                     <div>
+                       <FaRegEdit
+                         onClick={() => onEditClick(row.id)}
+                         style={{ cursor: "pointer", marginRight: "10px" }}
+                       />
+                       <FaRegTrashAlt
+                         onClick={() => onDeleteClick(row.id)}
+                         style={{ cursor: "pointer" }}
+                       />
+                     </div>
+                   ) : column.accessor === "active" ? (
+                     <ActiveStatus active={row.active}>
+                       {row.active ? "yes" : "no"}
+                     </ActiveStatus>
+                   ) : (
+                     row[column.accessor]
+                   )}
+                 </TableCell>
                   ))}
                 </TableRow>
               ))}

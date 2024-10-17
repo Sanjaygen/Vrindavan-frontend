@@ -8,7 +8,7 @@ export const CustomDropdownContainer = styled.div`
 export const CustomDropdownInput = styled.input<{ width: string,hasIcon?: boolean;}>`
   width: ${(props) => props.width};
   padding: 10px;
-  padding-right: ${(props) => (props.hasIcon ? '40px' : '8px')}; /* Space for the icon */
+  padding-right: ${(props) => (props.hasIcon ? '40px' : '8px')}; 
   box-sizing: border-box;
   cursor: pointer;
   border: 1px solid #ccc;
@@ -50,7 +50,7 @@ export const CustomSearchInput = styled.input<{ width: string }>`
   outline:none; 
 `;
 
-export const CustomIconContainer = styled.div<{ right: string }>`
+export const CustomIconContainer = styled.div<{ right ?: string }>`
   position: absolute;
   right: ${(props) => props.right};
   top: 20px;

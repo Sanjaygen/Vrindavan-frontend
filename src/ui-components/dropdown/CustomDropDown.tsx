@@ -16,7 +16,9 @@ interface CustomDropdownProps {
   width: string;
   dropdownWidth:string;
   listWidth: string;
-  iconRight: string;
+  iconRight?: string;
+  iconClassName?:string;
+  widthClassName?:string;
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
@@ -26,7 +28,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   width,
   dropdownWidth,
   listWidth,
-  iconRight
+  iconRight,
+  widthClassName = "", 
+  iconClassName = "", 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,10 +55,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         hasIcon={true}
         width={dropdownWidth}
         onClick={handleToggleDropdown}
+        className={widthClassName}
         readOnly
         value={selectedOption || placeholder}
       />
-      <CustomIconContainer onClick={handleToggleDropdown} right={iconRight}>
+      <CustomIconContainer onClick={handleToggleDropdown} right={iconRight} className={iconClassName} >
         <IoMdArrowDropdown
           style={{
             transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -64,12 +69,13 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
       </CustomIconContainer>
       {isOpen && (
         <>
-          <CustomDropdownList width={listWidth}>
+          <CustomDropdownList width={listWidth} className={widthClassName}>
             <CustomSearchInput
               type="text"
               placeholder="Search..."
               value={searchTerm}
               width={width}
+              className={widthClassName}
               onChange={handleSearchChange}
             />
             {filteredOptions.length > 0 ? (

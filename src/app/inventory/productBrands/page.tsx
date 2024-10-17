@@ -1,9 +1,10 @@
 "use client"
-import ProductBrandsComponents from "@/page-component/inventory/productBrands/ProductBrands";
+
+import ProductBrandsComponent from "@/page-component/inventory/productBrands/ProductBrands";
 import React from "react";
 
 const productBrandsPage = () => {
-  return <div><ProductBrandsComponents/></div>;
+  return <div><ProductBrandsComponent/></div>;
 };
 
 export default productBrandsPage;

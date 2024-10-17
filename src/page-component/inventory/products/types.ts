@@ -2,23 +2,22 @@
   name: string;
   description: string;
   price: number;
-  discountPrice: number;
-  productType: string;
-  productBrand: string;
-  locality: string;
+  discount_price: number;
+  product_type_id: string;
+  product_brand_id: string;
+  locality_id: string;
   weightage: string;
-  unitSize: string;
-  skuCode?: string;
+  unit_size: string;
   barcode?: string;
   cgst?: string;
   sgst?: string;
-  category: string;
-  subCategory: string;
+  sku_code: string;
+  category_id: string;
+  subcategory_id: string;
   featured: boolean;
   subscription: boolean;
-  trackInventory: boolean;
+  track_inventory: boolean;
   active: boolean;
-
   }
   
   export interface CreateBoxProps {

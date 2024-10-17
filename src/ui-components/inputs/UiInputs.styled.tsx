@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 export const InputStyled = styled(OutlinedInput)<{ width: string | number }>`
   border-radius: 4px;
-  width: ${(props) => (typeof props.width === 'number' ? `${props.width}px` : props.width)};
+  width: ${(props) => (props.width ? (typeof props.width === 'number' ? `${props.width}px` : props.width) : '100%')};
   height: 38px;
 `;
 

@@ -1,4 +1,4 @@
-import SubcategoriesComponents from "@/page-component/inventory/subCategories/Subcategories";
+import SubcategoriesComponents from "@/page-component/inventory/subCategories/SubCategories";
 import React from "react";
 
 const Subcategoriespage = () => {

@@ -3,13 +3,13 @@ import React, { forwardRef } from 'react';
 import { UiInputProps } from './types';
 import { HelperText, InputStyled } from './UiInputs.styled';
 
-const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
+function UiInputComponent(props: UiInputProps, ref: React.Ref<HTMLInputElement>) {
     const {
         id,
         className,
         placeholder,
         fullWidth = false,
-        width,
+        width = '100%',
         variant = 'outlined',
         type,
         ariaName,
@@ -50,13 +50,15 @@ const UiInput = forwardRef<HTMLInputElement, UiInputProps>((props, ref) => {
                 }}
                 value={value}
                 onChange={onInputHandler}
-                fullWidth={fullWidth} width={''}            />
+                fullWidth={fullWidth}
+                width={width}
+            />
             {renderHelperText()}
         </FormControl>
     );
-});
+}
 
-// Adding display name for better debugging
-UiInput.displayName = 'UiInput';
+// Use forwardRef and directly assign the function name as the display name
+const UiInput = forwardRef(UiInputComponent);
 
 export default UiInput;

@@ -1,6 +1,5 @@
 import React from "react";
 import { MainTab, TabIcon, TabList, TabListItem } from "./Tabs.styled";
-import ButtonGroup from "./helper-components/ButtonGroup";
 
 interface TabItem {
   id: string;
@@ -12,9 +11,10 @@ interface TabsProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   tabItems: TabItem[];
+  renderExtraContent?: (activeTab: string) => React.ReactNode;
 }
 
-const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab, tabItems }) => {
+const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab, tabItems,renderExtraContent }) => {
   return (
     <MainTab>
     <TabList>
@@ -29,11 +29,9 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab, tabItems }) => {
         </TabListItem>
       ))}
     </TabList>
-    <ButtonGroup
-    onExportClick={() => console.log("Export Clicked")}
-    anchorElExport={null}
-    onExportClose={() => console.log("Export Closed")}
-  />
+    {renderExtraContent && (
+        <div style={{ marginTop: '16px' }}>{renderExtraContent(activeTab)}</div> 
+      )}
   </MainTab>
   );
 };

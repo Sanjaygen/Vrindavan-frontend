@@ -3,10 +3,11 @@ import React from 'react';
 export type UiFormsProps = {
     id?: string;
     name?: string;
+    className?: string;
     placeholder?: string;
     fullWidth?:string;
     control: any;
-    width: string;
+    width?: string;
     type?: string;
     rules?: any;
     errorText?: string| React.ReactNode;

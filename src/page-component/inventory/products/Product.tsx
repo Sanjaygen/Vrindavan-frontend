@@ -10,6 +10,7 @@ import TabsComponent from "@/ui-components/tabs/Tabs";
 import { Container, ContentWrapper, HeaderWrapper } from "./Product.styled";
 import HeaderContent from "@/ui-components/headContent/HeadContent";
 import CustomBreadcrumbs from "@/ui-components/breadcrumbs/BreadCrumbs";
+import ButtonGroup from "@/ui-components/tabs/helper-components/ButtonGroup";
 
 const ProductTabs: React.FC = () => {
   const router = useRouter();
@@ -49,10 +50,21 @@ const ProductTabs: React.FC = () => {
 
   return (
     <ContentWrapper>
-      <TabsComponent
+       <TabsComponent
         activeTab={activeTab}
         setActiveTab={handleTabChange}
         tabItems={tabsData}
+        // Conditionally render ButtonGroup based on active tab
+        renderExtraContent={(activeTab) => {
+          console.log("Active Tab:", activeTab); 
+          return activeTab === "productList" ? (
+            <ButtonGroup
+              onExportClick={() => console.log("Export Clicked")}
+              anchorElExport={null}
+              onExportClose={() => console.log("Export Closed")}
+            />
+          ) : null;
+        }}
       />
 
       {activeTab === "productList" && (
@@ -64,7 +76,7 @@ const ProductTabs: React.FC = () => {
 
       {activeTab === "create" && <CreateProductPage />}
 
-      {activeTab === "edit" && productId && <EditProductPage />}
+      {activeTab === "edit" && productId && <EditProductPage/>}
 
       <DeleteConfirmationDialog
         open={openDialog}

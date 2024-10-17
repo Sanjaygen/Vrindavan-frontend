@@ -12,7 +12,7 @@ const QuillWrapper = styled.div`
     min-height: 220px; 
     max-height: 500px; 
     overflow-y: auto; 
-    margin-left:10px;
+    border-radius: 0px 0px 3px 3px;
   }
   .ql-editor {
     padding: 10px; 
@@ -21,7 +21,7 @@ const QuillWrapper = styled.div`
   .ql-toolbar {
     border-bottom: 1px solid #ccc; 
     width: 83%;
-    margin-left:10px;
+    border-radius: 3px 3px 0px 0px;
   }
 `;
 

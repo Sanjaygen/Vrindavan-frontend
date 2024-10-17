@@ -88,13 +88,13 @@ const SideDashBoard = () => {
         )}
       </MenuButton>
       <SubMenu $isOpen={openMenu === "customers"}>
-        <SubMenuButton href="/#">
+        <SubMenuButton href="/customers/addCustomer">
           <FaUsers className="sub-menu-icon" /> Add Customers
         </SubMenuButton>
         <SubMenuButton href="/#">
           <FaUsers className="sub-menu-icon" /> Customer List
         </SubMenuButton>
-        <SubMenuButton href="/#">
+        <SubMenuButton href="/customers/deliveryAddresses">
           <FaMap className="sub-menu-icon" /> Delivery Address
         </SubMenuButton>
       </SubMenu>

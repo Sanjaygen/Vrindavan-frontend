@@ -5,7 +5,7 @@ import UiInput from '../inputs/UiInputs';
 import { UiFormsProps } from './types';
 
 const FormInput = (props: UiFormsProps) => {
-    const { id, name = 'UpInput', control, rules,placeholder,width,errorText,type} = props;
+    const { id, name = 'UpInput', control, rules,placeholder,width,errorText,type,className} = props;
 
     return (
         <Controller
@@ -20,6 +20,7 @@ const FormInput = (props: UiFormsProps) => {
                     fullWidth 
                     type={type as 'text' | 'number' | 'email' | 'tel'} 
                     width = {width}
+                    className={className}
                     placeholder = {placeholder}
                     onInputHandler={onChange}
                     value={value}

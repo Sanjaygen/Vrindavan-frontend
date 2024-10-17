@@ -12,16 +12,6 @@ export interface CategoriesTableProps {
     onEditClick: () => void; 
 }
 
-export interface CategoryProps {
-    id: string;
-    category_name?: string;
-    updated_at?: string;
-    updatedAt: string;
-    name: string;
-    description: string;
-    weightage: string;
-    image: string | null;
-}
 
 export interface ProductBrandProps {
     id: string;
@@ -34,8 +24,17 @@ export interface Column {
     id: string; 
     label: string; 
     accessor: string; 
+    minWidth?: number;
+    align?: "right" | "left" | "center";
   }
-  
+  export interface TableRow {
+    id: string | number;
+    name: string;
+    image?: string | null; 
+    weightage?: number; 
+    updatedAt: string;
+    [key: string]: unknown; 
+  }
   export interface DashboardTableProps {
     columns: Column[]; 
     rows: Record<string, any>[]; 

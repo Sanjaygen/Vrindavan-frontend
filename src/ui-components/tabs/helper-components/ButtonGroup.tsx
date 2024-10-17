@@ -15,29 +15,38 @@ interface ButtonGroupProps {
 
 const ButtonGroupWrapper = styled.div`
   display: flex;
-  padding: 10px;
-  margin-left: 70%;
   gap: 4px;
   margin-left: auto;
   margin-right: 13px;
+   margin-top: -4px;
   border-bottom: 1px solid #ccc;
-  width: 50%;
-  ${breakpoints.xs}{
-    margin-top: 0px;
-    padding: 0px;
-    width: 90%;
-    margin-left: 20px;
+  // width: 50%;
+  ${breakpoints.md}{ 
+    display: flex;
+  gap: 4px;
+  margin-left: 260px;
+  margin-right: 13px;
+  margin-top: -45px;
+  border-bottom: 0px solid #ccc;
+  // width: 50%;
   }
-  ${breakpoints.sm}{
-    margin-top: 0px;
-    padding: 10px;
+  ${breakpoints.lg}{ 
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 13px;
+   margin-top: -8px;
+  border-bottom: 1px solid #ccc;
+  // width: 50%;
   }
-  ${breakpoints.lg}{
-    margin-top: 0px;
-    padding: 10px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: 13px;
+    ${breakpoints['2xl']}{ 
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 13px;
+   margin-top: -15px;
+  border-bottom: 1px solid #ccc;
+  // width: 50%;
   }
 `;
 
@@ -45,12 +54,9 @@ const StyledButtons = styled(Button)`
   border: none !important;
   border-radius: 3px 3px 0px 0px !important;
   font-family: Poppins,sans-serif !important;
-  color: #007BFF !important;
-  display: flex;
-  align-items: center;
   gap: 5px;
   padding: 2px 6px;
-  font-size: 16px !important;
+  font-size: 13px !important;
   min-width: auto;
   svg {
     font-size: 14px;
@@ -61,48 +67,42 @@ const StyledButtons = styled(Button)`
     border-right: 1px solid lightgrey  !important;
     border-bottom: none !important;
   }
-  ${breakpoints.xs}{
+     ${breakpoints.xs}{
     font-size: 10px !important;
     flex-direction: column;
   }
-  ${breakpoints.sm}{
-    font-size: 12px !important;
-    flex-direction: row;
-  }
-  ${breakpoints.md}{
-    font-size: 16px !important;
-    flex-direction: row;
-  }
+   ${breakpoints.md}{ 
+ font-size: 12px !important;
+ flex-direction: row;
+ }
+ ${breakpoints.lg}{ 
+ font-size: 10px !important;
+ }
+  ${breakpoints['2xl']}{ 
+ font-size: 14px !important;
+ }
 `;
 
 const ExportButton = styled(StyledButtons)`
   flex-direction: row-reverse;
   // gap: 10px;
-  ${breakpoints.xs}{
-    flex-direction: column-reverse;
-  }
-  ${breakpoints.sm}{
-    flex-direction: row-reverse;
-  }
+  ${breakpoints.lg}{ 
+   flex-direction: row-reverse;
+    }
 `;
 
 const IconSave = styled(FaRegSave)`
-  margin-top: 20px;
-  ${breakpoints.xs}{
-    margin-top: 20px;
-  }
-  ${breakpoints.sm}{
-    margin-top: 0px;
-  }
+  margin-top: 0px;
+  ${breakpoints.lg}{ 
+   margin-top: 0px;
+    }
 `
 const IconEye = styled(FaEye)`
-  margin-top: 20px;
-  ${breakpoints.xs}{
-    margin-top: 20px;
-  }
-  ${breakpoints.sm}{
-    margin-top: 0px;
-  }
+  margin-top: 0px;
+  
+  ${breakpoints.lg}{ 
+   margin-top: 0px;
+    }
 `
 
 const ButtonGroup = ({

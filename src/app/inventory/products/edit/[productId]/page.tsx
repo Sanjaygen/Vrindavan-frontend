@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation';
 import EditProductComponent from "@/page-component/inventory/products/helper-component/editProduct/EditProduct";
 import React from "react";
 
-const EditProductPage = () => {
+const EditCategoriesPage = () => {
   const { productId } = useParams<{ productId: string }>(); 
   const productIdNumber = Number(productId);
 
@@ -14,4 +14,4 @@ const EditProductPage = () => {
   );
 };
 
-export default EditProductPage;
+export default EditCategoriesPage;
